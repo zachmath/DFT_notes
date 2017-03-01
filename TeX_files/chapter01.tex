@@ -1,0 +1,109 @@
+\chapter{Pairing in Nuclear Theory}
+
+\maketitle
+There are several different ways to include pairing correlations in nuclear structure calculations, many of which are based on the BCS theory of superconductors. In it, nucleon pairs can be described as quasiparticles in a nuclear superfluid. Here I will describe three different approaches for describing nuclear structure which account for pairing, each with varying degrees of generality.
+
+\section*{BCS Theory and HF+BCS (\cite{suhonen2007nucleons,Anguiano2013})}
+One way to include pairing correlations is to solve the Hartree-Fock equations and add BCS on top. This method is called HF+BCS and it does a fair job of describing nuclei near the valley of stability, but gets progressively worse the further from stability you get (see \cite{Anguiano2013}).
+
+Basically the idea is that you use HF to take you from a system with a whole bunch of interdependent particles, which each obey a one-body Hamiltonian piece AND a two-body Hamiltonian piece, to an alternate basis in which you basically only have a one-body Hamiltonian. Then, in that basis, you solve the BCS equations on top, so you're doing BCS on a basis that doesn't exactly describe the real interaction Hamiltonian but is close enough to the real thing.
+
+Another way of saying it is that the HF equations give you single-particle wavefunctions, in the basis which most closely approximates/diagonalizes the [two-body] Hamiltonian. So it's sort of a fictitious basis, in that your Hamiltonian is not \textit{really} diagonal, but it's as good as you're gonna get. That's what the variation does - you're varying the ground state energy according to the coefficients which give you the most ideal linear combination of starting basis functions (harmonic oscillator or whatever). But the main idea is this: that you pretend your two-body Hamiltonian is actually a one-body Hamiltonian, diagonalize it, and make the error in your approximation as small as possible.
+
+For the next step, when you add in the BCS, you typically make (at least for even-even nuclei) the ground state ansatz $|BCS\rangle = \prod_{k>0}(u_k+v_k a_k^\dagger a_{\bar{k}}^\dagger)|0\rangle$, which doesn't conserve particle number (in fact, it's a linear superposition of pairs starting from zero pairs all the way up to $\frac{A}{2}$ pairs), but I guess it's close enough. Then you typically enforce particle number conservation some other way, perhaps by adding a Lagrange multiplier.
+
+Next you take your pairing Hamiltonian, which I suppose would include your mean-field, now one-body Hamiltonian (which stands in for the two-body Hamiltonian you had before you performed Hartree-Fock), and you add in a new two-body potential, which this time represents the effect of pairing. Then you perform a Hartree-Fock-style calculation all over again, essentially just doing another Hartree-Fock calculation on top of your original one, except that this time you might probably have an extra Lagrange multiplier constraint in your Hamiltonian. It doesn't change anything substantial but it's good to keep in mind. There are probably other ways of constraining particle number, too, like Lipkin-Nogami, but I'm not too sure how those work.
+
+Some other things to keep in mind:
+\begin{itemize}
+\item You can still think of your system in terms of the HF-basis real particle wavefunctions $a_k^\dagger |0\rangle$, with $|BCS\rangle = \prod_{k>0}(u_k+v_k a_k^\dagger a_{\bar{k}}^\dagger)|0\rangle$. Or, to simplify the math, you can invent a new "quasiparticle" such that $|BCS\rangle = \prod_{k}\alpha_k^\dagger|0\rangle$. This trick is called the Bogoliubov transformation and it looks like this:
+
+\begin{eqnarray}
+\alpha_k^\dagger = u_ka_k^\dagger-v_ka_{\bar{k}} \label{quasiparticle1}\\
+\alpha_{\bar{k}}^\dagger = u_ka_{\bar{k}}^\dagger+v_ka_k \label{quasiparticle2}
+\end{eqnarray}
+\item A pairing gap $\Delta = 0$ seems to mean there is no energy associated with pairing. All pairs are formed below the Fermi surface, because why on Earth wouldn't they? It's free! Whereas a nonzero pairing gap means there is some energy associated with forming a pair. So the probability of forming pairs is less than one below the Fermi surface, but there's also a possibility that pairs might form outside the Fermi surface. The pairing gap basically defines how far outside the Fermi surface you can go (see p 233 of \cite{ring1980nuclear}, for ex., or p 13 of \cite{Balbuena2003}).
+\item You could also do the BCS calculation using single-particle states derived from a phenomenological potential. You'd sacrifice some accuracy but gain some speed \cite{Anguiano2013}.
+\end{itemize}
+
+\section*{Hartree-Fock-Bogoliubov (HFB)  (\cite{ring1980nuclear,Balbuena2003})}
+In HF theory, you find the eigenfunctions of the one-body Hamiltonian which most closely resembles the actual two-body Hamiltonian. The basic idea to HFB is that in HFB you do basically the same thing, except you can't ignore two-body interactions because of pairing. So I guess in a way you sort of find the eigenfunctions of the two-body Hamiltonian which most closely resembles the actual four-body Hamiltonian. There's a little bit more subtlety than that, because the pairing correlations mean the particles are related somehow, but that's not a bad way to envision it, because one quasiparticle has a $U$ term, which corresponds to adding a particle, and a $V$ term, which does the opposite - so it's like creating a pair all at once (see equation \ref{HFBqp})! In reality, each HFB quasiparticle is a sum of such terms, but you get the idea. In some sense, one quasiparticle $\sim$ two real particles.
+
+By way of comparison to HF+BCS, which is a two-step process, HFB just does both steps at once to give you a single set of quasiparticle wavefunctions, instead of one set of single-particle wavefunctions based on another set of wavefunctions. The approximation in the end is better, but it is more computationally intensive than HF+BCS.
+
+Let's see how this calculation is to be done. Suppose our Hamiltonian is:
+
+\begin{equation}
+\hat{H}=\sum\limits_{i,j} t_{ij} \hat{c}_i^\dagger \hat{c}_j + \frac{1}{4}\sum\limits_{i,j,m,n} \bar{v}_{ijmn} \hat{c}_i^\dagger \hat{c}_j^\dagger \hat{c}_n \hat{c}_m
+\end{equation}
+
+As mentioned before, let us make the following Bogoliubov transformation to make the math simpler:
+
+\begin{equation}
+\left(\begin{array}{c}
+\hat{\beta} \\
+\hat{\beta^\dagger}
+\end{array}\right)
+= \left(\begin{array}{cc}
+U^\dagger & V^\dagger \\
+V^\dagger & U^\dagger
+\end{array}\right) \left(\begin{array}{c}
+\hat{c} \\
+\hat{c^\dagger}
+\end{array}\right) \label{HFBqp}
+\end{equation}
+
+\noindent Now the Hamiltonian looks like this:
+
+\begin{eqnarray}
+\hat{H} = \hat{H}_0 + \sum\limits_{i,j}\hat{H}_i,j\beta_i^\dagger\beta_j + \sum\limits_{i<j}(\hat{H}_{i,j}\beta_i^\dagger\beta_j^\dagger + h.c.) + \hat{H}_{int} \nonumber\\
+= \hat{H}_0 + \hat{H}_{11} + \hat{H}_{20} + \hat{H}_{40} + \hat{H}_{31} + \hat{H}_{22}
+\end{eqnarray}
+
+\noindent where $h.c.$ is the hermitian conjugate of the previous term and the term $\hat{H}_{nm}$ contains all terms with $n$ quasiparticle creation operators and $m$ annihilation operators. We'll lump the terms with 4 creation/annhilation operators into a single term $\hat{H}_{int}$, which we'll assume is small and thus ignore (sort of like the term $V(r)-\sum_{i,j}V(r_i,r_j)$ from regular Hartree-Fock theory). Let us constrain the average particle number by adding in a Lagrange multiplier term $\lambda N$. Then we vary the total energy with respect to $U$ and $V$ (which are matrices):
+
+\begin{equation}
+\delta E' = \langle\Phi_0|\hat{H}-\lambda\hat{N}|\Phi_0\rangle
+\end{equation}
+
+After that, it's really just algebra. The variation leaves some ambiguity still in the choice of $U$ and $V$, so we will choose them to make $\hat{H}_{20}=0$ and $\hat{H}_{11}$ diagonal. Additionally, the solution will look nicer if we introduce the following two densities, the traditional single-particle density from Hartree-Fock $\rho$ and a pairing tensor called $\kappa$:
+
+\begin{eqnarray}
+\rho_{ij} = \langle\Phi_0|\hat{c}_j^\dagger\hat{c}_i|\Phi_0\rangle = (VV^T)_{ij} \\
+\kappa_{ij} = \langle\Phi_0|\hat{c}_j\hat{c}_i|\Phi_0\rangle = (VU^T)_{ij}
+\end{eqnarray}
+
+We can make things look \textit{even nicer} if we introduce the following notation representing the mean field $\Gamma$ and the pairing field $\Delta$:
+
+\begin{eqnarray}
+\Gamma_{kl} = \sum_{i,j} \bar{v}_{kjli}\rho_{ij} \\
+\Delta_{kl} = \frac{1}{2}\sum_{i,j} \bar{v}_{klij}\kappa_{ij}
+\end{eqnarray}
+
+After we make all these substitutions, the Hamiltonian looks like:
+
+\begin{equation}
+\hat{H}-\lambda\hat{N} = \sum\limits_{i,j}\left(\left(t_{ij} + \frac{1}{2}\Gamma_{ij} - \lambda \right) \rho_{ji} + \frac{1}{2}\Delta_{ij}\kappa_{ji}^* \right) + \sum_{i}E_i \hat{\beta}_i^\dagger\hat{\beta}_i + \hat{H}_{int}
+\end{equation}
+
+\noindent where $\hat{H}_{int}$ contains all the terms with four creation/annhilation operators and $\sum_{i}E_i \hat{\beta}_i^\dagger\hat{\beta}_i$ is the diagonal form of $\hat{H}_{11}$.
+
+Finally, putting everything back in terms of the real particle creation and annhiliation operators $c_i^\dagger$ and $c_i$ (and then dropping those in favor of their coefficients), we get the Hartree-Fock-Bogoliubov equations in their most familiar form (setting $h=\epsilon+\Gamma$):
+
+\begin{equation}
+\left(\begin{array}{cc}
+h-\lambda & \Delta \\
+-\Delta^* & -(h-\lambda)^*
+\end{array}\right) \left(\begin{array}{c}
+\hat{U_k} \\
+\hat{V_k}
+\end{array}\right)
+= E_k\left(\begin{array}{c}
+\hat{U_k} \\
+\hat{V_k}
+\end{array}\right)
+\end{equation}
+
+The case of rotating nuclei is interesting because experimental moments of inertia of deformed nuclei are found to be 2-3 times larger than what is calculated when pairing is ignored. Suhonen interprets this to mean that actual rotations involve the superfluid valence pairs rotating around an inert core. You can treat this by adding another constraint to $\hat{H} - \lambda\hat{N} - \omega J_x$. This is the idea behind what is called the cranking model, which describes systems in a rotating frame. It violates time-reversal just like how you've already eliminated particle number conservation. And you can add other constraints $\hat{H} - \lambda\hat{N} - \lambda_i \hat{Q}_i$ for any number of other things, like shape deformations. We use these in fission a lot.
+
+%\bibliography{writeup}
