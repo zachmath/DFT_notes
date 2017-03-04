@@ -4,3 +4,74 @@ Originally this development is based on \cite{Engel1975}, and a retelling in not
 
 
 Some of this (specifically that relating to the inertia tensor and the cranking approximation) is mentioned in \cite{Baran2011}
+
+
+The HFB matrix looks different depending on your basis (obviously...). In the single-particle basis, it has the form
+
+\begin{equation}
+\mathcal{H} = \left(\begin{array}{cc}
+h & \Delta \\ 
+-\Delta* & -h^*
+\end{array} \right)
+\end{equation}
+
+\noindent with an associated density
+
+\begin{equation}
+\mathcal{R} = \left(\begin{array}{cc}
+\rho & \kappa \\ 
+-\kappa^* & 1-\rho^*
+\end{array} \right)
+\end{equation}
+
+\noindent Or something like that. I might have the signs and stars wrong.
+
+In the quasiparticle basis, on the other hand, these matrices look like this:
+
+\begin{equation}
+\mathcal{H} = \left(\begin{array}{cc}
+E & 0 \\ 
+0 & -E
+\end{array} \right),      
+\mathcal{R} = \left(\begin{array}{cc}
+0 & 0 \\ 
+0 & 1
+\end{array} \right)
+\end{equation}
+
+\noindent At finite temperatures $T>0$, the density is slightly modified:
+
+\begin{equation}
+\mathcal{R} = \left(\begin{array}{cc}
+f & 0 \\ 
+0 & 1-f
+\end{array} \right)
+\end{equation}
+
+What is done in ATDHFB (and, so far as I can tell, also in QRPA) is to expand your density $\mathcal{R}$ around some $\mathcal{R}_0$, which in QRPA corresponds to the HFB ground state density (I think) and in ATDHFB $\mathit{can}$ be the HFB ground state density (in practice, I think that is indeed what's most often done). The expansion parameter $\chi(t)$ works out to be, in some sense, a canonical coordinate or momentum or something like unto it. For small perturbations around the minumum, the system looks like a harmonic oscillator in time, described by the ATDHFB equations $i\dot{\mathcal{R}} = \left[\mathcal{H, R}\right]$. In ATDHFB, you find that the most common perturbations are collective coordinate changes (corresponding to shape deformations). Writing your derivatives in terms of these collective variables
+
+\begin{equation}
+\frac{d\mathcal{R}}{dt} = \frac{d\mathcal{R}}{dq}\frac{dq}{dt}
+\end{equation}
+
+\noindent and then writing everything in terms of $\chi(t)$ and $\dot{\chi}(t)$, you find an expression for the energy which looks like a kinetic energy, with $\dot{q}$'s or $\dot{\chi}$'s as your "velocity."
+
+Begin by expanding $\mathcal{R}\approx\mathcal{R}_0+\mathcal{R}_1$ and, correspondingly, $\mathcal{H}\approx\mathcal{H}_0+\mathcal{H}_1$. $\mathcal{R}_0$ and $\mathcal{H}_0$ are both diagonal in the quasiparticle basis, so it makes sense to start from there. Expand your commutator $i\dot{\mathcal{R}} = \left[\mathcal{H, R}\right]$ in terms of these guys where possible, and a lot of this stuff will turn out to be pretty trivial. The difficult part will be expressing $\mathcal{H}_1$ in the quasiparticle basis. For that, you'll probably need to start with $\mathcal{R}$ and $\mathcal{H}$ in the single-particle basis
+
+\begin{equation}
+\mathcal{R} = \left(\begin{array}{cc}
+\rho & \kappa \\ 
+-\kappa^* & 1-\rho^*
+\end{array} \right)
+\approx
+\left(\begin{array}{cc}
+\rho_0 & \kappa_0 \\ 
+-\kappa^*_0 & 1-\rho^*_0
+\end{array} \right) + 
+\left(\begin{array}{cc}
+\rho_1 & \kappa_1 \\ 
+-\kappa^*_1 & -\rho^*_1
+\end{array} \right)
+\end{equation}
+
+\noindent Then you'll construct $\mathcal{H}$ in this basis by explicitly evaluating $h_{ij} = t_{ij} + \sum_{mn}\bar{v}_{imjn}\rho_{nm}$ and $\Delta_{ij} = \frac{1}{2}\sum_{mn}\bar{v}_{ijmn}\kappa_{mn}$ (double-check the indices and expressions before use, of course!). You can transform this into the quasiparticle basis, or the other part into the single particle basis (or in reality, I think you'll have to do a bit of both), and that'll give you the full expression. However, in the cranking approximation, we actually apparently ignore this whole second term because we assume that small changes in the density will not affect the mean field ($\mathcal{R}\approx\mathcal{R}_0 \Rightarrow\mathcal{H}_1\approx0$)

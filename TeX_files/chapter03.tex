@@ -1,0 +1,40 @@
+\chapter{RPA vs ATDHF and QRPA vs ATDHFB}
+
+I suspect the "Random Phase" in RPA refers to the $\chi$ which pops up when we rewrite the density $\rho$ about the HF/HFB ground state density $\rho_0$ in the following way:
+
+\begin{equation}
+\rho = e^{i\chi} \rho_0 e^{-i\chi}
+\end{equation}
+
+\noindent The "Approximation" part of RPA is when we expand $\rho$ for small perturbations about the ground state, truncating the series at (typically) first- or second-order in $\chi$.
+
+In static RPA, once we've expanded the density and the energy out to second-order in $\chi$, you can rewrite the second-order energy term as a vector-matrix-vector multiplication:
+
+\begin{equation}
+E^{(2)} = \frac{1}{2}\left(\chi^\dagger, -\chi^T\right) \left(\begin{array}{cc}
+A & B \\
+B^* & A^*
+\end{array}\right) \left(\begin{array}{c}
+\chi \\
+-\chi^*
+\end{array}\right)
+\end{equation}
+
+\noindent This matrix is what is called the RPA matrix (or sometimes the stability matrix, since $|E^{(2)}|>0$ corresponds to $\rho_0$ being a minimum, I think).
+
+This matrix actually pops up again when you start from the TDHF equations $i\hbar\frac{\partial\rho}{\partial t} = [h, \rho]$. Expand the density around its ground state in terms of some parameter $\chi$ again, except this time, $\chi$ is time-dependent. If you work in the HF basis where the density and the energy are both diagonal, and keeping terms to first order this time, you eventually arrive at
+
+\begin{equation}
+i\hbar(n_j-n_i)\frac{\partial}{\partial t}\left(\begin{array}{c}
+\chi_{ij} \\
+\chi_{ij}^*
+\end{array}\right) = \left(\begin{array}{cc}
+A_{ij\mu\nu} & B_{ij\mu\nu} \\
+B^*_{ij\mu\nu} & A^*_{ij\mu\nu}
+\end{array}\right) \left(\begin{array}{c}
+\chi_{\mu\nu} \\
+-\chi^*_{\mu\nu}
+\end{array}\right)
+\end{equation}
+
+So apparently this matrix is significant somehow.
