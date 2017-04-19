@@ -1,0 +1,60 @@
+\chapter{Temperature-dependent Hartree-Fock Bogoliubov}
+
+A lot of these ideas I'm getting from \cite{Schunck2015} as well as Nicolas' own temperature-dependent HFB notes.
+
+\section*{A brief overview of the theory}
+
+As in any statistical theory, one first must determine which sort of ensemble properly describes the system. Nuclei have (in principle) conserved number of particles; however in HFB theory, that's somewhat flexible since the BCS transformation explicitly breaks particle number symmetry. In principle we should perhaps use a microcanonical ensemble to describe a nucleus as a closed, isolated system, but that turns out to be challenging to solve because it requires a full knowledge of the eigenspectrum of the nucleus. Using that quirk of HFB theory, we wiggle our way out of this hairiness\footnote{You can wave your hands here and say that finite temperatures let you break superfluid pairs, and so the number of "quasiparticles" (which you could argue might have referred to pairs before but now might also include individual particles) can change.} to instead describe our system using the grand canonical ensemble, and this turns out to be tractable.
+
+Moving forward by minimizing the grand potential $\Omega$ gives us for the density:
+\begin{equation*}
+\hat{D} = \frac{1}{Z}e^{-\beta\left(\hat{H}-\mu\hat{N}\right)}
+\end{equation*}
+
+\noindent with associated partition function
+
+\begin{equation*}
+Z = Tr\left[e^{-\beta\left(\hat{H}-\mu\hat{N}\right)}\right]
+\end{equation*}
+
+Getting specifically to our particular choice of mean-field Hamiltonian, we substitute in some one-body operator for the exponent:
+
+\begin{equation*}
+\hat{D}_{HF} = \frac{1}{Z}e^{-\beta\hat{K}}, Z = Tr\left[e^{-\beta\hat{K}}\right]
+\end{equation*}
+
+\noindent where in the plain ol' Hartree Fock case, $\hat{K} = \sum_{ij}K_{ij}c_i^\dagger c_j$ (in the HFB case, $\hat{K}$ is a sum of all different one-body operator types, but it's the same basic idea).
+
+Defining the HF density matrix $\rho_{ij}=Tr\left[\hat{D}_{HF}c_j^\dagger c_i\right]$, we can show the following useful correspondence relations:
+
+\begin{align*}
+\rho &= \frac{1}{1+e^{\beta\hat{K}}} \\
+Tr\left[\hat{D}_{HF}\hat{A}\right] &= tr\left[\rho\hat{A}\right] = \sum_{ij}\rho_{ij}\hat{A}_{ij}
+\end{align*}
+
+\noindent where $\hat{A}$ is some operator in the single-particle basis. Similar things happen for the HFB case. At the end of the day in HFB, things work out to be pretty similar to the way they were before, except the density in the quasiparticle basis is replaced by
+
+\begin{equation*}
+\mathcal{R} =
+\left(\begin{array}{cc}
+0 & 0 \\
+0 & 1
+\end{array}\right)
+\rightarrow
+\left(\begin{array}{cc}
+f & 0 \\
+0 & 1-f
+\end{array}\right)
+\end{equation*}
+
+\noindent Obviously there's a lot more richness to it than that, but this helps to at least see the basic skeleton of what changes at finite temperature.
+
+\section*{Fission at finite temperature}
+
+There are several complications associated with considering a nucleus at finite temperature. I'd like to discuss first of all what that even means and why it is significant, and then I'll talk about some of the challenges of this approach.
+
+The idea of considering fission as a finite temperature process stems from trying to develop a picture of induced fission. In induced fission, a neutron which carries some amount of energy is captured by a heavy nucleus in its ground state. That extra energy's gotta go somewhere, but where? In a large nucleus, you have all sorts of places, including any number of single particle excitations, or combination of single particle excitations, or perhaps the entire nucleus moves together as one large collective excitation. Apparently some people went through and did the combinatorics of these possible excitations and decided that the number of them was huge (like, $~10^{12}$ huge) \cite{Hilaire2012}. So handling them explicitly just isn't going to work.
+
+Additionally, DFT might not be the best tool for performing finite-temperature calculations. This is because DFT is typically implemented as a variational method, which means it's good for ground state calculations. But highly-deformed nuclei are inherently \textit{not} in their ground state. In fact, this is true even for "zero-temperature" DFT as well. In practice the results we get are pretty good (most likely the system has time to equilibriate to its "deformed ground state" at each deformation step, or in other words the path to scission proceeds ~adiabatically), but it's something to definitely keep in mind that (I suspect) could strongly affect your half-life predictions and fragment energies in particular. Furthermore, it's not clear to me how you might correct that should the need arise.
+
+A third thing that Nicolas claims is that the temperature should depend on the actual deformation. I'm not sure where exactly this comes from but it sounds plausible to me. The thing that really gets me is that he then does some voodoo black magic to conclude that in FT-DFT, we have to assume that T is constant across the entire PES. That I'm not understanding and I'll have to ask him about that when he gets back.
