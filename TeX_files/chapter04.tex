@@ -2,7 +2,7 @@
 
 A lot of these ideas I'm getting from \cite{Schunck2015} as well as Nicolas' own temperature-dependent HFB notes.
 
-\section*{A brief overview of the theory}
+\section{A brief overview of the theory}
 
 As in any statistical theory, one first must determine which sort of ensemble properly describes the system. Nuclei have (in principle) conserved number of particles; however in HFB theory, that's somewhat flexible since the BCS transformation explicitly breaks particle number symmetry. In principle we should perhaps use a microcanonical ensemble to describe a nucleus as a closed, isolated system, but that turns out to be challenging to solve because it requires a full knowledge of the eigenspectrum of the nucleus. Using that quirk of HFB theory, we wiggle our way out of this hairiness\footnote{You can wave your hands here and say that finite temperatures let you break superfluid pairs, and so the number of "quasiparticles" (which you could argue might have referred to pairs before but now might also include individual particles) can change.} to instead describe our system using the grand canonical ensemble, and this turns out to be tractable.
 
@@ -49,7 +49,7 @@ f & 0 \\
 
 \noindent Obviously there's a lot more richness to it than that, but this helps to at least see the basic skeleton of what changes at finite temperature.
 
-\section*{Temperature-Dependent ATDHFB}
+\section{Temperature-Dependent ATDHFB}
 
 Let us quickly review the essence of Time-Dependent Hartree-Fock-Bogoliubov (TDHFB). The fundamental assumption of TDHFB is that a system which is a Slater determinant at time $t=0$ and which is then allowed to evolve in time will remain a Slater determinant at all times $t$. This assumption allows us to write to TDHFB equation:
 
@@ -74,9 +74,9 @@ h-\lambda & \Delta \\
 
 The \textit{additional} assumption that collective motion is slow compared to single particle motion of the system is called the \textit{adiabtic approximation}, and the consequent model is called Adiabatic Time-Dependent Hartree-Fock-Bogoliubov (ATDHFB). Historically, the reason for this assumption comes from microscopic-macroscopic models of nuclear fission, where the dynamics of the system are described by a few collective shape variables and their derivatives (you might think of them semiclassically as coordinates and velocities). The adiabatic approximation is implicit in this assumption. ATDHFB provides the bridge for bringing this useful framework into a self-consistent, fully-microscopic picture.
 
-Once the system is described in terms of collective coordinates and velocities, the energy can be expressed as the sum of a "potential" term (which depends on the coordinates) and a "kinetic" term (which depends on the velocities). Our goal is to understand the kinetic part of the energy, which in some sense describes the dynamics of, for example, a fissioning nucleus, in terms of the first few multipole moments of the nucleus. A key component of this will be the inertia tensor $\mathcal{M}$, which plays the role of the "mass": $E_{kin}~\frac{1}{2}\mathcal{M}\dot{q}^2$
+Once the system is described in terms of collective coordinates and velocities, the energy can be expressed as the sum of a "potential" term (which depends on the coordinates) and a "kinetic" term (which depends on the velocities). Our goal is to understand the kinetic part of the energy, which in some sense describes the dynamics of, for example, a fissioning nucleus, in terms of the first few multipole moments of the nucleus. A key component of this will be the inertia tensor $\mathcal{M}$, which plays the role of the "mass": $E_{kin}\sim\frac{1}{2}\mathcal{M}\dot{q}^2$
 
-\subsection*{Review of ATDHFB}
+\subsection{Review of ATDHFB}
 
 With the adiabatic assumption in place, we can write the density as an expansion around some time-even zeroth-order density:
 
@@ -87,7 +87,7 @@ With the adiabatic assumption in place, we can write the density as an expansion
 
 \noindent where $\chi$ is assumed to be "small" (which is explained more rigorously in \cite{Baranger1978}) and
 
-\begin{align}\label{densities}
+\begin{align}\label{eqn:densities}
 \mathcal{R}_1 &= i\left[\chi, \mathcal{R}_0\right] \\
 \mathcal{R}_2 &= \frac{1}{2}\left[\left[\chi, \mathcal{R}_0\right], \chi\right] 
 \end{align}
@@ -100,7 +100,7 @@ With the adiabatic assumption in place, we can write the density as an expansion
 
 \noindent and together $\mathcal{R}$ and $\mathcal{H}$ are plugged into the TDHFB equation. Gathering terms in powers of $\chi$:
 
-\begin{align}\label{ATDHFB}
+\begin{align}\label{eqn:ATDHFB}
 i\hbar\mathcal{\dot{R}}_0 &= \left[\mathcal{H}_0, \mathcal{R}_1\right] + \left[\mathcal{H}_1, \mathcal{R}_0\right] \\
 i\hbar\mathcal{\dot{R}}_1 &= \left[\mathcal{H}_0, \mathcal{R}_0\right] + \left[\mathcal{H}_0, \mathcal{R}_2\right]
  + \left[\mathcal{H}_1, \mathcal{R}_1\right] + \left[\mathcal{H}_2, \mathcal{R}_0\right]
@@ -118,7 +118,7 @@ E(\mathcal{R}) = E_{HFB} + \frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_
 
 \noindent The "kinetic energy" of the system is given by the latter two terms, which (as I'll show explicitly in a moment), are both second order in $\chi$.
 
-\subsection*{Relation between $\dot{\chi}$ and $\dot{\mathcal{R}}$}
+\subsection{Relation between $\chi$ and $\dot{\mathcal{R}}$}\label{sect:chi-rdot}
 
 Eventually we'll want to express the energy in terms of the multipole moments $q$ and their derivatives, but for now we will content ourselves with expressing the energy in terms of $\mathcal{R}$ and $\dot{\mathcal{R}}$. From the first ATDHFB equation:
 
@@ -141,7 +141,7 @@ f & 0 \\
 \end{array}\right)
 \end{equation*}
 
-\noindent Note that the block matrices $E$ and $f$ are both diagonal. Ultimately, by using the equations \ref{densities}, we arrive at the result:
+\noindent Note that the block matrices $E$ and $f$ are both diagonal. Ultimately, by using the equations \ref{eqn:densities}, we arrive at the result:
 
 \begin{align*}
 \hbar \dot{\mathcal{R}}_{ab}^{11} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{11} + (f_b-f_a)\mathcal{H}^{11}_{(1),ab} \\
@@ -152,14 +152,18 @@ f & 0 \\
 
 It is common (the so-called "cranking approximation") to assume that changes in the density have approximately no effect on the mean field, in which case these relations reduce to
 
-\begin{align*}
+\begin{tcolorbox}
+\begin{align}\label{eqn:chi-rdot}
+\begin{aligned}
 \hbar \dot{\mathcal{R}}_{ab}^{11} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{11} \\
 \hbar \dot{\mathcal{R}}_{ab}^{12} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{12} \\
 \hbar \dot{\mathcal{R}}_{ab}^{21} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{21} \\
 \hbar \dot{\mathcal{R}}_{ab}^{22} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{22}
-\end{align*}
+\end{aligned}
+\end{align}
+\end{tcolorbox}
 
-\subsection*{Kinetic Energy at Finite Temperature}
+\subsection{Kinetic Energy at Finite Temperature}
 
 As mentioned previously, the expression for the "kinetic" energy of the system is given by:
 
@@ -188,21 +192,63 @@ It can be shown that
 \end{array}\right)
 \end{equation*}
 
-\begin{align*}
+\begin{align}\label{eqn:H0R2}
+\begin{aligned}
 \mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = \frac{1}{2}&\mathrm{Tr} \left([\chi^{11},E][\chi^{11},f] - \left\{\chi^{12},E\right\}(\chi^{21}-\{\chi^{21},f\})\right. \\
 &\left.+ \left\{\chi^{21},E\right\}(\chi^{12}-\{\chi^{12},f\}) - [\chi^{22},E][\chi^{22},f]\right)
+\end{aligned}
+\end{align}
+
+Since $E$ and $f$ are diagonal, we can simplify expressions involving commutators and anticommutators. If $A$ is an arbitrary matrix and $D$ is diagonal, then
+
+\begin{align*}
+[A,D]_{\mu\nu} &= (D_\nu-D_\mu)A_{\mu\nu} \\
+\left\{A,D\right\}_{\mu\nu} &= (D_\mu+D_\nu)A_{\mu\nu} \\
+A_{\mu\nu}-\left\{A,D\right\}_{\mu\nu} &= (1-D_\mu-D_\nu)A_{\mu\nu}
 \end{align*}
+
+\noindent Then this energy term becomes
+
+\begin{align*}
+\frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = \frac{1}{4}& \left[(E_b-E_a)(f_a-f_b)\chi^{11}_{ab}\chi^{11}_{ba} - (E_a+E_b)(1-f_a-f_b)\chi^{12}_{ab}\chi^{21}_{ba}\right. \\
+&\left.+ (E_a+E_b)(1-f_a-f_b)\chi^{21}_{ab}\chi^{12}_{ba} - (E_b-E_a)(f_a-f_b)\chi^{22}_{ab}\chi^{22}_{ba}\right]
+\end{align*}
+
+\noindent If you wanted to get \textit{really} crazy (and we'll see in a bit why this might actually be okay), you could even throw in some extra delta functions to get this:
+
+\begin{align*}
+\frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = \frac{1}{4}& \left[(E_b-E_a)(f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{11}_{\alpha\beta}\chi^{11}_{ba} - (E_a+E_b)(1-f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{12}_{\alpha\beta}\chi^{21}_{ba}\right. \\
+&\left.+ (E_a+E_b)(1-f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{21}_{\alpha\beta}\chi^{12}_{ba} - (E_b-E_a)(f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{22}_{\alpha\beta}\chi^{22}_{ba}\right]
+\end{align*}
+
+\noindent Note that this now has the general form
+
+\begin{tcolorbox}
+\begin{align}\label{eqn:H0R2_inertia}
+\frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = &
+ \mathcal{\bar{M'}}^{11,11}_{\alpha\beta ab}\chi^{11}_{\alpha\beta}\chi^{11}_{ba} +
+ \mathcal{\bar{M'}}^{12,21}_{\alpha\beta ab}\chi^{12}_{\alpha\beta}\chi^{21}_{ba} +
+ \mathcal{\bar{M'}}^{21,12}_{\alpha\beta ab}\chi^{21}_{\alpha\beta}\chi^{12}_{ba} +
+ \mathcal{\bar{M'}}^{22,22}_{\alpha\beta ab}\chi^{22}_{\alpha\beta}\chi^{22}_{ba}
+\end{align}
+\end{tcolorbox}
+
+\noindent where everything that isn't a $\chi$ has just been kind of absorbed into a single coefficient.
+
+Let's pause here for just a second and think about what we just did. Remember that our goal all along has been to treat this piece of the energy as sort of a "kinetic energy term" describing motion in a space of collective shape deformation coordinates. Then just now we found that, sure enough, we can factor this particular chunk into something that looks \textit{kind of} like $\frac{1}{2}mv^2$. And we already know from \ref{eqn:chi-rdot} that $\chi$ is related to $\mathcal{\dot{R}}$. Eventually we'll try to relate $\mathcal{\dot{R}}$ to the collective shape coordinates $\dot{q}$, but first let's see if we can't get the other piece of the kinetic energy into the same form.
 
 \subsubsection{Term proportional to $\mathcal{R}_1$}
 
-Recall that $\mathcal{R}_1 = i\left[\chi, \mathcal{R}_0\right]$; then we can almost copy from the previous section (forgive the abrupt change in notation):
+Recall that $\mathcal{R}_1 = i\left[\chi, \mathcal{R}_0\right]$; then we can almost copy from equation \ref{eqn:H0R2} of the previous section:
 
-\begin{align*}
+\begin{align}\label{eqn:H1R1}
 \frac{1}{4}\mathrm{Tr}\left(\mathcal{H}_{1}\mathcal{R}_{1}\right) = \frac{i}{4}&\mathrm{Tr} \left(\mathcal{H}_{1}^{11}[\chi^{11},f] - \mathcal{H}_{1}^{12}(\chi^{21}-\{\chi^{21},f\}) \right. \\
-&\left.+ \mathcal{H}_{1}^{21}(\chi^{12}-\{\chi^{12},f\}) - \mathcal{H}_{1}^{22}[\chi^{22},f]\right)
-\end{align*}
+&\left.+ \mathcal{H}_{1}^{21}(\chi^{12}-\{\chi^{12},f\}) - \mathcal{H}_{1}^{22}[\chi^{22},f]\right) \\
+= \frac{i}{4}& \left(\mathcal{H}_{(1),ab}^{11}(f_a-f_b)\chi^{11}_{ba} - \mathcal{H}_{(1),ab}^{12}(1-f_a-f_b)\chi^{21}_{ba} \right. \\
+&\left.+ \mathcal{H}_{(1),ab}^{21}(1-f_a-f_b)\chi^{12}_{ba} - \mathcal{H}_{(1),ab}^{22}(f_a-f_b)\chi^{22}_{ba}\right)
+\end{align}
 
-\noindent But what are those $\mathrm{H}^{1}$ terms? Since the interaction is known in the single-particle basis, we'll have to transform our density into the single-particle basis $\mathcal{R}_1\rightarrow\mathcal{\tilde{R}}_1$, evaluate $\mathcal{\tilde{H}}_1$ (which depends on $\mathcal{\tilde{R}}_1$) in this basis, and then transform the result back into the quasiparticle basis $\mathcal{\tilde{H}}_1\rightarrow\mathcal{H}_1$
+\noindent But what are those $\mathcal{H}^{1}$ terms? Since the interaction is known in the single-particle basis, we'll have to transform our density into the single-particle basis $\mathcal{R}_1\rightarrow\mathcal{\tilde{R}}_1$, evaluate $\mathcal{\tilde{H}}_1$ (which depends on $\mathcal{\tilde{R}}_1$) in this basis, and then transform the result back into the quasiparticle basis $\mathcal{\tilde{H}}_1\rightarrow\mathcal{H}_1$
 
 \begin{equation*}
 \mathcal{\tilde{R}}_1 = \left(\begin{array}{cc}
@@ -241,12 +287,14 @@ In the single-particle basis, we can compute the interaction mean field $\Gamma_
 
 To clean up the presentation a bit, let us introduce the following:
 
+\begin{tcolorbox}
 \begin{align*}
 J^{11}_{ij\alpha\beta} = i\bar{v}_{ikjl}U_{l\alpha}U^\dagger_{\beta k} &\qquad J^{22}_{ij\alpha\beta} = -i\bar{v}_{ikjl}V^*_{l\alpha}V^T_{\beta k} \\
 K^{12}_{ij\alpha\beta} = i\bar{v}_{ikjl}U_{l\alpha}V^T_{\beta k} &\qquad K^{21}_{ij\alpha\beta} = -i\bar{v}_{ikjl}V^*_{l\alpha}U^\dagger_{\beta k} \\
 L^{12}_{ij\alpha\beta} = i\bar{v}_{ijkl}U_{l\alpha}U^T_{\beta k} &\qquad L^{21}_{ij\alpha\beta} = -i\bar{v}_{ijkl}V^*_{l\alpha}V^\dagger_{\beta k} \\
 M^{11}_{ij\alpha\beta} = i\bar{v}_{ijkl}U_{l\alpha}V^\dagger_{\beta k} &\qquad M^{22}_{ij\alpha\beta} = -i\bar{v}_{ijkl}V^*_{l\alpha}U^T_{\beta k}
 \end{align*}
+\end{tcolorbox}
 
 \noindent Then the fields simplify to
 
@@ -279,14 +327,82 @@ V^T\Gamma_1V^* + V^T\Delta_1U^* - U^T\Delta_1^*V^* - U^T\Gamma_1^*U^* \\
 \end{array}\right)
 \end{align*}
 
+\noindent Assuming further that the full matrix $\chi$ is Hermitian, then $\chi^{11*}=\chi^{11}$, $\chi^{22*}=\chi^{22}$, and $\chi^{12*}=\chi^{21}$. This leads in turn to
+
 \begin{align*}
-\mathcal{H}_{(1),pq}^{11} &= \\
-\mathcal{H}_{(1),pq}^{12} &= \\
-\mathcal{H}_{(1),pq}^{21} &= \\
-\mathcal{H}_{(1),pq}^{22} &= 
+[\chi^{11},f]^* &= -[\chi^{11},f] \\
+[\chi^{22},f]^* &= -[\chi^{22},f] \\
+\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)^* &= \left(\chi^{21}-\left\{\chi^{21},f\right\}\right) \\
+\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)^* &= \left(\chi^{12}-\left\{\chi^{12},f\right\}\right)
 \end{align*}
 
-\section*{Fission at finite temperature}
+The whole mess written out is
+
+\begin{align*}
+\mathcal{H}_{(1),ab}^{11} &= \left(U_{ai}^\dagger U_{jb} J_{ij\alpha\beta}^{11} + U_{ai}^\dagger V_{jb} \frac{M_{ij\alpha\beta}^{11}}{2} + V_{ai}^\dagger U_{jb} \frac{M_{ij\alpha\beta}^{11*}}{2} + V_{ai}^\dagger V_{jb} J_{ij\alpha\beta}^{11*}  \right)(f_\beta-f_\alpha)\chi^{11}_{\alpha\beta} \\
+&+ \left(U_{ai}^\dagger U_{jb} J_{ij\alpha\beta}^{22} + U_{ai}^\dagger V_{jb} \frac{M_{ij\alpha\beta}^{22}}{2} + V_{ai}^\dagger U_{jb} \frac{M_{ij\alpha\beta}^{22*}}{2} + V_{ai}^\dagger V_{jb} J_{ij\alpha\beta}^{22*}  \right)(f_\beta-f_\alpha)\chi^{22}_{\alpha\beta} \\
+&+ \left(U_{ai}^\dagger U_{jb} K_{ij\alpha\beta}^{12} + U_{ai}^\dagger V_{jb} \frac{L_{ij\alpha\beta}^{12}}{2} - V_{ai}^\dagger U_{jb} \frac{L_{ij\alpha\beta}^{21*}}{2} + V_{ai}^\dagger V_{jb} K_{ij\alpha\beta}^{21*}  \right)\left(1-f_\alpha-f_\beta\right)\chi^{12}_{\alpha\beta} \\
+&+ \left(U_{ai}^\dagger U_{jb} K_{ij\alpha\beta}^{21} + U_{ai}^\dagger V_{jb} \frac{L_{ij\alpha\beta}^{21}}{2} - V_{ai}^\dagger U_{jb} \frac{L_{ij\alpha\beta}^{12*}}{2} + V_{ai}^\dagger V_{jb} K_{ij\alpha\beta}^{12*}  \right)\left(1-f_\alpha-f_\beta\right)\chi^{21}_{\alpha\beta}
+\end{align*}
+\begin{align*}
+\mathcal{H}_{(1),ab}^{12} &= \left(U_{ai}^\dagger V^*_{jb} J_{ij\alpha\beta}^{11} + U_{ai}^\dagger U^*_{jb} \frac{M_{ij\alpha\beta}^{11}}{2} + V_{ai}^\dagger V^*_{jb} \frac{M_{ij\alpha\beta}^{11*}}{2} + V_{ai}^\dagger U^*_{jb} J_{ij\alpha\beta}^{11*}  \right)(f_\beta-f_\alpha)\chi^{11}_{\alpha\beta} \\
+&+ \left(U_{ai}^\dagger V^*_{jb} J_{ij\alpha\beta}^{22} + U_{ai}^\dagger U^*_{jb} \frac{M_{ij\alpha\beta}^{22}}{2} + V_{ai}^\dagger V^*_{jb} \frac{M_{ij\alpha\beta}^{22*}}{2} + V_{ai}^\dagger U^*_{jb} J_{ij\alpha\beta}^{22*}  \right)(f_\beta-f_\alpha)\chi^{22}_{\alpha\beta} \\
+&+ \left(U_{ai}^\dagger V^*_{jb} K_{ij\alpha\beta}^{12} + U_{ai}^\dagger U^*_{jb} \frac{L_{ij\alpha\beta}^{12}}{2} - V_{ai}^\dagger V^*_{jb} \frac{L_{ij\alpha\beta}^{21*}}{2} + V_{ai}^\dagger U^*_{jb} K_{ij\alpha\beta}^{21*}  \right)\left(1-f_\alpha-f_\beta\right)\chi^{12}_{\alpha\beta} \\
+&+ \left(U_{ai}^\dagger V^*_{jb} K_{ij\alpha\beta}^{21} + U_{ai}^\dagger U^*_{jb} \frac{L_{ij\alpha\beta}^{21}}{2} - V_{ai}^\dagger V^*_{jb} \frac{L_{ij\alpha\beta}^{12*}}{2} + V_{ai}^\dagger U^*_{jb} K_{ij\alpha\beta}^{12*}  \right)\left(1-f_\alpha-f_\beta\right)\chi^{21}_{\alpha\beta}
+\end{align*}
+\begin{align*}
+\mathcal{H}_{(1),ab}^{21} &= \left(V^T_{ai} U_{jb} J_{ij\alpha\beta}^{11} + V_{ai}^T V_{jb} \frac{M_{ij\alpha\beta}^{11}}{2} + U_{ai}^T U_{jb} \frac{M_{ij\alpha\beta}^{11*}}{2} + U_{ai}^T V_{jb} J_{ij\alpha\beta}^{11*}  \right)(f_\beta-f_\alpha)\chi^{11}_{\alpha\beta} \\
+&+ \left(V_{ai}^T U_{jb} J_{ij\alpha\beta}^{22} + V_{ai}^T V_{jb} \frac{M_{ij\alpha\beta}^{22}}{2} + U_{ai}^T U_{jb} \frac{M_{ij\alpha\beta}^{22*}}{2} + U_{ai}^T V_{jb} J_{ij\alpha\beta}^{22*}  \right)(f_\beta-f_\alpha)\chi^{22}_{\alpha\beta} \\
+&+ \left(V_{ai}^T U_{jb} K_{ij\alpha\beta}^{12} + V_{ai}^T V_{jb} \frac{L_{ij\alpha\beta}^{12}}{2} - U_{ai}^T U_{jb} \frac{L_{ij\alpha\beta}^{21*}}{2} + U_{ai}^T V_{jb} K_{ij\alpha\beta}^{21*}  \right)\left(1-f_\alpha-f_\beta\right)\chi^{12}_{\alpha\beta} \\
+&+ \left(V_{ai}^T U_{jb} K_{ij\alpha\beta}^{21} + V_{ai}^T V_{jb} \frac{L_{ij\alpha\beta}^{21}}{2} - U_{ai}^T U_{jb} \frac{L_{ij\alpha\beta}^{12*}}{2} + U_{ai}^T V_{jb} K_{ij\alpha\beta}^{12*}  \right)\left(1-f_\alpha-f_\beta\right)\chi^{21}_{\alpha\beta}
+\end{align*}
+\begin{align*}
+\mathcal{H}_{(1),ab}^{22} &= \left(V_{ai}^T V^*_{jb} J_{ij\alpha\beta}^{11} + V_{ai}^T U^*_{jb} \frac{M_{ij\alpha\beta}^{11}}{2} + U_{ai}^T V^*_{jb} \frac{M_{ij\alpha\beta}^{11*}}{2} + U_{ai}^T U^*_{jb} J_{ij\alpha\beta}^{11*}  \right)(f_\beta-f_\alpha)\chi^{11}_{\alpha\beta} \\
+&+ \left(V_{ai}^T V^*_{jb} J_{ij\alpha\beta}^{22} + V_{ai}^T U^*_{jb} \frac{M_{ij\alpha\beta}^{22}}{2} + U_{ai}^T V^*_{jb} \frac{M_{ij\alpha\beta}^{22*}}{2} + U_{ai}^T U^*_{jb} J_{ij\alpha\beta}^{22*}  \right)(f_\beta-f_\alpha)\chi^{22}_{\alpha\beta} \\
+&+ \left(V_{ai}^T V^*_{jb} K_{ij\alpha\beta}^{12} + V_{ai}^T U^*_{jb} \frac{L_{ij\alpha\beta}^{12}}{2} - U_{ai}^T V^*_{jb} \frac{L_{ij\alpha\beta}^{21*}}{2} + U_{ai}^T U^*_{jb} K_{ij\alpha\beta}^{21*}  \right)\left(1-f_\alpha-f_\beta\right)\chi^{12}_{\alpha\beta} \\
+&+ \left(V_{ai}^T V^*_{jb} K_{ij\alpha\beta}^{21} + V_{ai}^T U^*_{jb} \frac{L_{ij\alpha\beta}^{21}}{2} - U_{ai}^T V^*_{jb} \frac{L_{ij\alpha\beta}^{12*}}{2} + U_{ai}^T U^*_{jb} K_{ij\alpha\beta}^{12*}  \right)\left(1-f_\alpha-f_\beta\right)\chi^{21}_{\alpha\beta}
+\end{align*}
+
+Looking back to \ref{eqn:H1R1}, we see that we can write it in the same form as \ref{eqn:H0R2_inertia}:
+
+\begin{tcolorbox}
+\begin{align}\label{eqn:H1R1_inertia}
+\begin{aligned}
+\frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = &
+ \mathcal{\bar{M''}}^{11,11}_{\alpha\beta ab}\chi^{11}_{\alpha\beta}\chi^{11}_{ba} +
+ \mathcal{\bar{M''}}^{12,11}_{\alpha\beta ab}\chi^{12}_{\alpha\beta}\chi^{11}_{ba} +
+ \mathcal{\bar{M''}}^{21,11}_{\alpha\beta ab}\chi^{21}_{\alpha\beta}\chi^{11}_{ba} +
+ \mathcal{\bar{M''}}^{22,11}_{\alpha\beta ab}\chi^{22}_{\alpha\beta}\chi^{11}_{ba} \\
+&
+ \mathcal{\bar{M''}}^{11,12}_{\alpha\beta ab}\chi^{11}_{\alpha\beta}\chi^{12}_{ba} +
+ \mathcal{\bar{M''}}^{12,12}_{\alpha\beta ab}\chi^{12}_{\alpha\beta}\chi^{12}_{ba} +
+ \mathcal{\bar{M''}}^{21,12}_{\alpha\beta ab}\chi^{21}_{\alpha\beta}\chi^{12}_{ba} +
+ \mathcal{\bar{M''}}^{22,12}_{\alpha\beta ab}\chi^{22}_{\alpha\beta}\chi^{12}_{ba} \\
+&
+ \mathcal{\bar{M''}}^{11,21}_{\alpha\beta ab}\chi^{11}_{\alpha\beta}\chi^{21}_{ba} +
+ \mathcal{\bar{M''}}^{12,21}_{\alpha\beta ab}\chi^{12}_{\alpha\beta}\chi^{21}_{ba} +
+ \mathcal{\bar{M''}}^{21,21}_{\alpha\beta ab}\chi^{21}_{\alpha\beta}\chi^{21}_{ba} +
+ \mathcal{\bar{M''}}^{22,21}_{\alpha\beta ab}\chi^{22}_{\alpha\beta}\chi^{21}_{ba} \\
+&
+ \mathcal{\bar{M''}}^{11,22}_{\alpha\beta ab}\chi^{11}_{\alpha\beta}\chi^{22}_{ba} +
+ \mathcal{\bar{M''}}^{12,22}_{\alpha\beta ab}\chi^{12}_{\alpha\beta}\chi^{22}_{ba} +
+ \mathcal{\bar{M''}}^{21,22}_{\alpha\beta ab}\chi^{21}_{\alpha\beta}\chi^{22}_{ba} +
+ \mathcal{\bar{M''}}^{22,22}_{\alpha\beta ab}\chi^{22}_{\alpha\beta}\chi^{22}_{ba}
+\end{aligned}
+\end{align}
+\end{tcolorbox}
+
+\subsubsection{The total kinetic energy}
+
+Expressions \ref{eqn:H0R2_inertia} and \ref{eqn:H1R1_inertia} can be combined into one single expression involving the vector-like object $\chi$ and the matrix-like object $\mathcal{\bar{M}}=2(\mathcal{\bar{M'}+\bar{M''}})$
+
+\begin{equation}
+E_{kin} \sim \frac{1}{2}\chi\mathcal{\bar{M}}\chi^\dagger
+\end{equation}
+
+You can use equations \ref{eqn:chi-rdot} to change variables to $\mathcal{\dot{R}}$ instead of $\chi$, but I'm going to skip that for now because what we really want is to use $\dot{q}$ and I'm running out of $\mathcal{M}$'s.
+
+\section{Fission at finite temperature}
 
 There are several complications associated with considering a nucleus at finite temperature. I'd like to discuss first of all what that even means and why it is significant, and then I'll talk about some of the challenges of this approach.
 
