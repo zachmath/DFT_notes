@@ -1,4 +1,4 @@
-\chapter{Temperature-dependent Hartree-Fock Bogoliubov}
+\chapter{Temperature-dependent ATDHFB}
 
 A lot of these ideas I'm getting from \cite{Schunck2015} as well as Nicolas' own temperature-dependent HFB notes.
 
@@ -60,12 +60,12 @@ i\hbar \mathcal{\dot{R}} = \left[\mathcal{H},\mathcal{R}\right]
 \noindent where in the single-particle basis
 
 \begin{equation*}
-\mathcal{H} = 
+\mathcal{\tilde{H}} = 
 \left(\begin{array}{cc}
 h-\lambda & \Delta \\
 -\Delta^* & -h^*+\lambda
 \end{array}\right), 
-\qquad \mathcal{R} = 
+\qquad \mathcal{\tilde{R}} = 
 \left(\begin{array}{cc}
 \rho & \kappa \\
 -\kappa^* & 1-\rho^*
@@ -113,8 +113,10 @@ One nice feature of using true HFB solutions instead of ATDHFB solutions is that
 Finally, the total energy of the system is found to be
 
 \begin{equation*}
-E(\mathcal{R}) = E_{HFB} + \frac{1}{2}\mathnormal{Tr}\left(\mathcal{H}_0\mathcal{R}_1\right) + \frac{1}{2}\mathnormal{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) + \frac{1}{4}\mathnormal{Tr}\left(\mathcal{H}_1\mathcal{R}_1\right)
+E(\mathcal{R}) = E_{HFB} + \frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_1\right) + \frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) + \frac{1}{4}\mathrm{Tr}\left(\mathcal{H}_1\mathcal{R}_1\right)
 \end{equation*}
+
+\noindent The "kinetic energy" of the system is given by the latter two terms, which (as I'll show explicitly in a moment), are both second order in $\chi$.
 
 \subsection*{Relation between $\dot{\chi}$ and $\dot{\mathcal{R}}$}
 
@@ -127,12 +129,12 @@ i\hbar\mathcal{\dot{R}}_0 = \left[\mathcal{H}_0, \mathcal{R}_1\right] + \left[\m
 Working in the HFB quasiparticle basis, we have (at finite temperatures)
 
 \begin{equation*}
-\mathcal{H} = 
+\mathcal{H}_0 = 
 \left(\begin{array}{cc}
 E & 0 \\
 0 & -E
 \end{array}\right), 
-\qquad \mathcal{R} = 
+\qquad \mathcal{R}_0 = 
 \left(\begin{array}{cc}
 f & 0 \\
 0 & 1-f
@@ -158,6 +160,131 @@ It is common (the so-called "cranking approximation") to assume that changes in 
 \end{align*}
 
 \subsection*{Kinetic Energy at Finite Temperature}
+
+As mentioned previously, the expression for the "kinetic" energy of the system is given by:
+
+\begin{equation*}
+E_{kin}(\mathcal{R}) = \frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) + \frac{1}{4}\mathrm{Tr}\left(\mathcal{H}_1\mathcal{R}_1\right)
+\end{equation*}
+
+\subsubsection{Term proportional to $\mathcal{R}_2$}
+
+It can be shown that
+
+\begin{equation*}
+\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = \frac{1}{2}\mathrm{Tr}\left(\left[\chi,\mathcal{H}_0\right]\left[\chi,\mathcal{R}_0\right]\right)
+\end{equation*}
+
+\noindent which leads to
+
+\begin{equation*}
+\left[\chi, \mathcal{H}_0\right] = \left(\begin{array}{cc}
+[\chi^{11},E] & -\left\{\chi^{12},E\right\} \\
+\left\{\chi^{21},E\right\} & -[\chi^{22},E]
+\end{array}\right), \qquad
+\left[\chi, \mathcal{R}_0\right] = \left(\begin{array}{cc}
+[\chi^{11},f] & \chi^{12}-\left\{\chi^{12},f\right\} \\
+-\chi^{21}+\left\{\chi^{21},f\right\} & -[\chi^{22},f]
+\end{array}\right)
+\end{equation*}
+
+\begin{align*}
+\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = \frac{1}{2}&\mathrm{Tr} \left([\chi^{11},E][\chi^{11},f] - \left\{\chi^{12},E\right\}(\chi^{21}-\{\chi^{21},f\})\right. \\
+&\left.+ \left\{\chi^{21},E\right\}(\chi^{12}-\{\chi^{12},f\}) - [\chi^{22},E][\chi^{22},f]\right)
+\end{align*}
+
+\subsubsection{Term proportional to $\mathcal{R}_1$}
+
+Recall that $\mathcal{R}_1 = i\left[\chi, \mathcal{R}_0\right]$; then we can almost copy from the previous section (forgive the abrupt change in notation):
+
+\begin{align*}
+\frac{1}{4}\mathrm{Tr}\left(\mathcal{H}_{1}\mathcal{R}_{1}\right) = \frac{i}{4}&\mathrm{Tr} \left(\mathcal{H}_{1}^{11}[\chi^{11},f] - \mathcal{H}_{1}^{12}(\chi^{21}-\{\chi^{21},f\}) \right. \\
+&\left.+ \mathcal{H}_{1}^{21}(\chi^{12}-\{\chi^{12},f\}) - \mathcal{H}_{1}^{22}[\chi^{22},f]\right)
+\end{align*}
+
+\noindent But what are those $\mathrm{H}^{1}$ terms? Since the interaction is known in the single-particle basis, we'll have to transform our density into the single-particle basis $\mathcal{R}_1\rightarrow\mathcal{\tilde{R}}_1$, evaluate $\mathcal{\tilde{H}}_1$ (which depends on $\mathcal{\tilde{R}}_1$) in this basis, and then transform the result back into the quasiparticle basis $\mathcal{\tilde{H}}_1\rightarrow\mathcal{H}_1$
+
+\begin{equation*}
+\mathcal{\tilde{R}}_1 = \left(\begin{array}{cc}
+\rho_1 & \kappa_1 \\
+-\kappa_1^* & -\rho_1^*
+\end{array}\right) = 
+i\left(\begin{array}{cc}
+U & V^* \\
+V & U^*
+\end{array}\right)
+\left(\begin{array}{cc}
+[\chi^{11},f] & \chi^{12}-\left\{\chi^{12},f\right\} \\
+-\chi^{21}+\left\{\chi^{21},f\right\} & -[\chi^{22},f]
+\end{array}\right)
+\left(\begin{array}{cc}
+U^\dagger & V^\dagger \\
+V^T & U^T
+\end{array}\right)
+\end{equation*}
+
+\begin{align*}
+\Rightarrow \quad& \rho_1 = i\left(U[\chi^{11},f]U^\dagger + U\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)V^T - V^*\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)U^\dagger - V^*[\chi^{22},f]V^T \right) \\
+& \kappa_1 = i\left(U[\chi^{11},f]V^\dagger + U\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)U^T - V^*\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)V^\dagger - V^*[\chi^{22},f]U^T \right)
+\end{align*}
+
+In the single-particle basis, we can compute the interaction mean field $\Gamma_{(1),ij} = \bar{V}_{ikjl}\rho_{(1),lk}$ and the pairing field $\Delta_{(1),ij} = \frac{1}{2}\bar{V}_{ijkl}\kappa_{(1),kl}$:
+
+\begin{align*}
+\Gamma_{(1),ij} &= \bar{V}_{ikjl}\rho_{(1),lk} \\
+&= i\bar{V}_{ikjl}\left(U_{l\alpha}[\chi^{11},f]_{\alpha\beta}U^\dagger_{\beta k} + U_{l\alpha}\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)_{\alpha\beta}V^T_{\beta k}\right. \\
+&\left.\qquad - V^*_{l\alpha}\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)_{\alpha\beta}U^\dagger_{\beta k} - V^*_{l\alpha}[\chi^{22},f]_{\alpha\beta}V^T_{\beta k} \right) \\
+\Delta_{(1),ij} &= \frac{1}{2}\bar{V}_{ijkl}\kappa_{(1),kl} \\
+&= \frac{i}{2}\bar{V}_{ijkl}\left(U_{l\alpha}[\chi^{11},f]_{\alpha\beta}V^\dagger_{\beta k} + U_{l\alpha}\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)_{\alpha\beta}U^T_{\beta k}\right. \\
+&\left.\qquad - V^*_{l\alpha}\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)_{\alpha\beta}V^\dagger_{\beta k} - V^*_{l\alpha}[\chi^{22},f]_{\alpha\beta}U^T_{\beta k} \right)
+\end{align*}
+
+To clean up the presentation a bit, let us introduce the following:
+
+\begin{align*}
+J^{11}_{ij\alpha\beta} = i\bar{v}_{ikjl}U_{l\alpha}U^\dagger_{\beta k} &\qquad J^{22}_{ij\alpha\beta} = -i\bar{v}_{ikjl}V^*_{l\alpha}V^T_{\beta k} \\
+K^{12}_{ij\alpha\beta} = i\bar{v}_{ikjl}U_{l\alpha}V^T_{\beta k} &\qquad K^{21}_{ij\alpha\beta} = -i\bar{v}_{ikjl}V^*_{l\alpha}U^\dagger_{\beta k} \\
+L^{12}_{ij\alpha\beta} = i\bar{v}_{ijkl}U_{l\alpha}U^T_{\beta k} &\qquad L^{21}_{ij\alpha\beta} = -i\bar{v}_{ijkl}V^*_{l\alpha}V^\dagger_{\beta k} \\
+M^{11}_{ij\alpha\beta} = i\bar{v}_{ijkl}U_{l\alpha}V^\dagger_{\beta k} &\qquad M^{22}_{ij\alpha\beta} = -i\bar{v}_{ijkl}V^*_{l\alpha}U^T_{\beta k}
+\end{align*}
+
+\noindent Then the fields simplify to
+
+\begin{align*}
+\Gamma_{(1),ij} &= J^{11}_{ij\alpha\beta}[\chi^{11},f]_{\alpha\beta} + K^{12}_{ij\alpha\beta}\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)_{\alpha\beta} + K^{12}_{ij\alpha\beta}\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)_{\alpha\beta} + J^{22}_{ij\alpha\beta}[\chi^{22},f]_{\alpha\beta} \\
+2\Delta_{(1),ij}  &= M^{11}_{ij\alpha\beta}[\chi^{11},f]_{\alpha\beta} + L^{12}_{ij\alpha\beta}\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)_{\alpha\beta} + L^{12}_{ij\alpha\beta}\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)_{\alpha\beta} + M^{22}_{ij\alpha\beta}[\chi^{22},f]_{\alpha\beta} \\
+\end{align*}
+
+Now we can transform the fields back into the quasiparticle basis:
+
+\begin{align*}
+\mathcal{H}_1 &= 
+\left(\begin{array}{cc}
+U^\dagger & V^\dagger \\
+V^T & U^T
+\end{array}\right)
+\left(\begin{array}{cc}
+\Gamma_1 & \Delta_1 \\
+-\Delta_1^* & -\Gamma_1^*
+\end{array}\right)
+\left(\begin{array}{cc}
+U & V^* \\
+V & U^*
+\end{array}\right) \\
+&= \left(\begin{array}{cc}
+U^\dagger\Gamma_1U + U^\dagger\Delta_1V - V^\dagger\Delta_1^*U - V^\dagger\Gamma_1^*V & 
+U^\dagger\Gamma_1V^* + U^\dagger\Delta_1U^* - V^\dagger\Delta_1^*V^* - V^\dagger\Gamma_1^*U^* \\
+V^T\Gamma_1U + V^T\Delta_1V - U^T\Delta_1^*U - U^T\Gamma_1^*V & 
+V^T\Gamma_1V^* + V^T\Delta_1U^* - U^T\Delta_1^*V^* - U^T\Gamma_1^*U^* \\
+\end{array}\right)
+\end{align*}
+
+\begin{align*}
+\mathcal{H}_{(1),pq}^{11} &= \\
+\mathcal{H}_{(1),pq}^{12} &= \\
+\mathcal{H}_{(1),pq}^{21} &= \\
+\mathcal{H}_{(1),pq}^{22} &= 
+\end{align*}
 
 \section*{Fission at finite temperature}
 
