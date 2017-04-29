@@ -144,10 +144,10 @@ f & 0 \\
 \noindent Note that the block matrices $E$ and $f$ are both diagonal. Ultimately, by using the equations \ref{eqn:densities}, we arrive at the result:
 
 \begin{align*}
-\hbar \dot{\mathcal{R}}_{ab}^{11} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{11} + (f_b-f_a)\mathcal{H}^{11}_{(1),ab} \\
-\hbar \dot{\mathcal{R}}_{ab}^{12} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{12} + \left(1-(f_a+f_b)\right)\mathcal{H}^{12}_{(1),ab} \\
-\hbar \dot{\mathcal{R}}_{ab}^{21} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{21} - \left(1-(f_a+f_b)\right)\mathcal{H}^{21}_{(1),ab} \\
-\hbar \dot{\mathcal{R}}_{ab}^{22} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{22} - (f_b-f_a)\mathcal{H}^{22}_{(1),ab}
+\hbar \dot{\mathcal{R}}_{(0),ab}^{11} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{11} + (f_b-f_a)\mathcal{H}^{11}_{(1),ab} \\
+\hbar \dot{\mathcal{R}}_{(0),ab}^{12} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{12} + \left(1-(f_a+f_b)\right)\mathcal{H}^{12}_{(1),ab} \\
+\hbar \dot{\mathcal{R}}_{(0),ab}^{21} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{21} - \left(1-(f_a+f_b)\right)\mathcal{H}^{21}_{(1),ab} \\
+\hbar \dot{\mathcal{R}}_{(0),ab}^{22} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{22} - (f_b-f_a)\mathcal{H}^{22}_{(1),ab}
 \end{align*}
 
 It is common (the so-called "cranking approximation") to assume that changes in the density have approximately no effect on the mean field, in which case these relations reduce to
@@ -155,10 +155,10 @@ It is common (the so-called "cranking approximation") to assume that changes in 
 \begin{tcolorbox}
 \begin{align}\label{eqn:chi-rdot}
 \begin{aligned}
-\hbar \dot{\mathcal{R}}_{ab}^{11} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{11} \\
-\hbar \dot{\mathcal{R}}_{ab}^{12} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{12} \\
-\hbar \dot{\mathcal{R}}_{ab}^{21} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{21} \\
-\hbar \dot{\mathcal{R}}_{ab}^{22} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{22}
+\hbar \dot{\mathcal{R}}_{(0),ab}^{11} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{11} \\
+\hbar \dot{\mathcal{R}}_{(0),ab}^{12} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{12} \\
+\hbar \dot{\mathcal{R}}_{(0),ab}^{21} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{21} \\
+\hbar \dot{\mathcal{R}}_{(0),ab}^{22} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{22}
 \end{aligned}
 \end{align}
 \end{tcolorbox}
@@ -235,7 +235,7 @@ A_{\mu\nu}-\left\{A,D\right\}_{\mu\nu} &= (1-D_\mu-D_\nu)A_{\mu\nu}
 
 \noindent where everything that isn't a $\chi$ has just been kind of absorbed into a single coefficient.
 
-Let's pause here for just a second and think about what we just did. Remember that our goal all along has been to treat this piece of the energy as sort of a "kinetic energy term" describing motion in a space of collective shape deformation coordinates. Then just now we found that, sure enough, we can factor this particular chunk into something that looks \textit{kind of} like $\frac{1}{2}mv^2$. And we already know from \ref{eqn:chi-rdot} that $\chi$ is related to $\mathcal{\dot{R}}$. Eventually we'll try to relate $\mathcal{\dot{R}}$ to the collective shape coordinates $\dot{q}$, but first let's see if we can't get the other piece of the kinetic energy into the same form.
+Let's pause here for just a second and think about what we just did. Remember that our goal all along has been to treat this piece of the energy as sort of a "kinetic energy term" describing motion in a space of collective shape deformation coordinates. Then just now we found that, sure enough, we can factor this particular chunk into something that looks \textit{kind of} like $\frac{1}{2}mv^2$. And we already know from \ref{eqn:chi-rdot} that $\chi$ is related to $\mathcal{\dot{R}}_0$. Eventually we'll try to relate $\mathcal{\dot{R}}_0$ to the collective shape coordinates $\dot{q}$, but first let's see if we can't get the other piece of the kinetic energy into the same form.
 
 \subsubsection{Term proportional to $\mathcal{R}_1$}
 
@@ -396,11 +396,72 @@ Looking back to \ref{eqn:H1R1}, we see that we can write it in the same form as 
 
 Expressions \ref{eqn:H0R2_inertia} and \ref{eqn:H1R1_inertia} can be combined into one single expression involving the vector-like object $\chi$ and the matrix-like object $\mathcal{\bar{M}}=2(\mathcal{\bar{M'}+\bar{M''}})$
 
+\begin{equation*}
+\chi_{ab} \equiv \left(\begin{array}{c}
+\chi_{ab}^{11}\\
+\chi_{ab}^{12}\\
+\chi_{ab}^{21}\\
+\chi_{ab}^{22}
+\end{array}\right), \qquad
+\chi^\dagger_{\alpha\beta} = \left(\chi_{\alpha\beta}^{11*} \chi_{\alpha\beta}^{12*} \chi_{\alpha\beta}^{21*} \chi_{\alpha\beta}^{22*} \right)
+\end{equation*}
+
 \begin{equation}
-E_{kin} \sim \frac{1}{2}\chi\mathcal{\bar{M}}\chi^\dagger
+E_{kin} \sim \frac{1}{2}\chi^\dagger\mathcal{\bar{M}}\chi
 \end{equation}
 
-You can use equations \ref{eqn:chi-rdot} to change variables to $\mathcal{\dot{R}}$ instead of $\chi$, but I'm going to skip that for now because what we really want is to use $\dot{q}$ and I'm running out of $\mathcal{M}$'s.
+You can use equations \ref{eqn:chi-rdot} to change variables to $\mathcal{\dot{R}}_0$ instead of $\chi$, but I'm going to skip that for now because what we really want is to use $\dot{q}$ and I'm running out of $\mathcal{M}$'s.
+
+\subsubsection{Cranking Approximation}
+
+We already introduced the cranking approximation briefly in section \ref{sect:chi-rdot} to simplify the relation between $\chi$ and $\mathcal{\dot{R}}_0$ when we assumed that changes in the density will have approximately no affect on the mean field ($\mathcal{H}_1 \approx 0$). We can apply this to the energy expression, and then the inertia tensor is pretty simple:
+
+\begin{equation}
+\mathcal{\bar{M}} = \frac{1}{4}\left(\begin{array}{cccc}
+(E_b-E_a)(f_a-f_b) & 0                    &                     0 & 0 \\
+0                  & 0                    & -(E_a+E_b)(1-f_a-f_b) & 0 \\
+0                  & (E_a+E_b)(1-f_a-f_b) & 0                     & 0 \\
+0                  & 0                    & 0                     & -(E_b-E_a)(f_a-f_b)
+\end{array}\right)
+\end{equation}
+
+\subsection{The Inertia Tensor}
+
+Now that we have an expression for the energy in terms of an inertia tensor $\mathcal{\bar{M}}$ and the expansion parameter $\chi$. We already know that $\chi$ is related to time-dependent changes in the density $\mathcal{\dot{R}}_0$; now let us further try to relate $\chi$ to changes in the collective shape multipole moments of the nucleus.
+
+Suppose there is a set of collective variables $(q_1,q_2,\dots,q_n)$ which describe changes in the density $\mathcal{R}_0(t)$ at all times $t$. Then
+
+\begin{equation*}
+\mathcal{\dot{R}}_0 = \sum_{\mu=1}^{n}\dot{q_\mu}\frac{\partial\mathcal{R}_0}{\partial q_\mu}
+\end{equation*}
+
+\noindent Relating this back to $\chi$ using equations \ref{eqn:chi-rdot} (we'll just stick with the cranking approximation here) gives
+
+\begin{align*}
+\chi^{11}_{ab} &= \sum_{\mu=1}^{n}\frac{\hbar\dot{q_\mu}}{(E_a-E_b)(f_b-f_a)}\frac{\partial\mathcal{R}^{11}_{(0),ab}}{\partial q_\mu} \\
+\chi^{12}_{ab} &= \sum_{\mu=1}^{n}\frac{\hbar\dot{q_\mu}}{(E_a+E_b)(1-f_a-f_b)}\frac{\partial\mathcal{R}^{12}_{(0),ab}}{\partial q_\mu} \\
+\chi^{21}_{ab} &= \sum_{\mu=1}^{n}\frac{\hbar\dot{q_\mu}}{(E_a+E_b)(1-f_a-f_b)}\frac{\partial\mathcal{R}^{21}_{(0),ab}}{\partial q_\mu} \\
+\chi^{22}_{ab} &= \sum_{\mu=1}^{n}\frac{\hbar\dot{q_\mu}}{(E_a-E_b)(f_b-f_a)}\frac{\partial\mathcal{R}^{22}_{(0),ab}}{\partial q_\mu} \\
+\end{align*}
+
+If we take this now and plug it into our energy expression \ref{eqn:H0R2_inertia}, the following is what happens:
+
+\begin{tcolorbox}
+\begin{equation}
+E_{kin} \approx \frac{1}{2}\sum_{\mu\nu}\dot{q}_\mu\dot{q}_\nu\mathsf{M}_{\mu\nu}
+\end{equation}
+\end{tcolorbox}
+
+\noindent where
+
+\begin{tcolorbox}
+\begin{align}
+\begin{aligned}
+\mathsf{M}_{\mu\nu} =  \frac{\hbar^2}{2}&\left[\frac{1}{(E_a-E_b)(f_b-f_a)}\left(\frac{\partial\mathcal{R}^{11}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{11}_{(0),ba}}{\partial q_\nu}-\frac{\partial\mathcal{R}^{22}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{22}_{(0),ba}}{\partial q_\mu}\right)\right. \\
+&\left.\frac{1}{(E_a+E_b)(1-f_a-f_b)}\left(\frac{\partial\mathcal{R}^{21}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{12}_{(0),ba}}{\partial q_\nu}-\frac{\partial\mathcal{R}^{12}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{21}_{(0),ba}}{\partial q_\mu}\right)\right]
+\end{aligned}
+\end{align}
+\end{tcolorbox}
 
 \section{Fission at finite temperature}
 
