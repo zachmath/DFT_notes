@@ -4,7 +4,7 @@ A lot of these ideas I'm getting from \cite{Schunck2015} as well as Nicolas' own
 
 \section{A brief overview of the theory}
 
-As in any statistical theory, one first must determine which sort of ensemble properly describes the system. Nuclei have (in principle) conserved number of particles; however in HFB theory, that's somewhat flexible since the BCS transformation explicitly breaks particle number symmetry. In principle we should perhaps use a microcanonical ensemble to describe a nucleus as a closed, isolated system, but that turns out to be challenging to solve because it requires a full knowledge of the eigenspectrum of the nucleus. Using that quirk of HFB theory, we wiggle our way out of this hairiness\footnote{You can wave your hands here and say that finite temperatures let you break superfluid pairs, and so the number of "quasiparticles" (which you could argue might have referred to pairs before but now might also include individual particles) can change.} to instead describe our system using the grand canonical ensemble, and this turns out to be tractable.
+As in any statistical theory, one first must determine which sort of ensemble properly describes the system. Nuclei have (in principle) conserved number of particles; however in HFB theory, that's somewhat flexible since the BCS transformation explicitly breaks particle number symmetry. In principle we should perhaps use a microcanonical ensemble to describe a nucleus as a closed, isolated system, but that turns out to be challenging to solve because it requires a full knowledge of the eigenspectrum of the nucleus. Using that quirk of HFB theory, we wiggle our way out of this hairiness\footnote{You can wave your hands here and say that finite temperatures let you break superfluid pairs, and so the number of ``quasiparticles" (which you could argue might have referred to pairs before but now might also include individual particles) can change.} to instead describe our system using the grand canonical ensemble, and this turns out to be tractable.
 
 Moving forward by minimizing the grand potential $\Omega$ gives us for the density:
 \begin{equation*}
@@ -74,7 +74,7 @@ h-\lambda & \Delta \\
 
 The \textit{additional} assumption that collective motion is slow compared to single particle motion of the system is called the \textit{adiabtic approximation}, and the consequent model is called Adiabatic Time-Dependent Hartree-Fock-Bogoliubov (ATDHFB). Historically, the reason for this assumption comes from microscopic-macroscopic models of nuclear fission, where the dynamics of the system are described by a few collective shape variables and their derivatives (you might think of them semiclassically as coordinates and velocities). The adiabatic approximation is implicit in this assumption. ATDHFB provides the bridge for bringing this useful framework into a self-consistent, fully-microscopic picture.
 
-Once the system is described in terms of collective coordinates and velocities, the energy can be expressed as the sum of a "potential" term (which depends on the coordinates) and a "kinetic" term (which depends on the velocities). Our goal is to understand the kinetic part of the energy, which in some sense describes the dynamics of, for example, a fissioning nucleus, in terms of the first few multipole moments of the nucleus. A key component of this will be the inertia tensor $\mathcal{M}$, which plays the role of the "mass": $E_{kin}\sim\frac{1}{2}\mathcal{M}\dot{q}^2$
+Once the system is described in terms of collective coordinates and velocities, the energy can be expressed as the sum of a ``potential" term (which depends on the coordinates) and a ``kinetic" term (which depends on the velocities). Our goal is to understand the kinetic part of the energy, which in some sense describes the dynamics of, for example, a fissioning nucleus, in terms of the first few multipole moments of the nucleus. A key component of this will be the inertia tensor $\mathcal{M}$, which plays the role of the ``mass": $E_{kin}\sim\frac{1}{2}\mathcal{M}\dot{q}^2$
 
 \subsection{Review of ATDHFB}
 
@@ -85,7 +85,7 @@ With the adiabatic assumption in place, we can write the density as an expansion
 &= \mathcal{R}_0 + \mathcal{R}_1 + \mathcal{R}_2 + \dots
 \end{align*}
 
-\noindent where $\chi$ is assumed to be "small" (which is explained more rigorously in \cite{Baranger1978}) and
+\noindent where $\chi$ is assumed to be ``small" (which is explained more rigorously in \cite{Baranger1978}) and
 
 \begin{align}\label{eqn:densities}
 \mathcal{R}_1 &= i\left[\chi, \mathcal{R}_0\right] \\
@@ -116,7 +116,7 @@ Finally, the total energy of the system is found to be
 E(\mathcal{R}) = E_{HFB} + \frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_1\right) + \frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) + \frac{1}{4}\mathrm{Tr}\left(\mathcal{H}_1\mathcal{R}_1\right)
 \end{equation*}
 
-\noindent The "kinetic energy" of the system is given by the latter two terms, which (as I'll show explicitly in a moment), are both second order in $\chi$.
+\noindent The ``kinetic energy" of the system is given by the latter two terms, which (as I'll show explicitly in a moment), are both second order in $\chi$.
 
 \subsection{Relation between $\chi$ and $\dot{\mathcal{R}}$}\label{sect:chi-rdot}
 
@@ -141,16 +141,33 @@ f & 0 \\
 \end{array}\right)
 \end{equation*}
 
-\noindent Note that the block matrices $E$ and $f$ are both diagonal. Ultimately, by using the equations \ref{eqn:densities}, we arrive at the result:
+\noindent Note that the block matrices $E$ and $f$ are both diagonal. In this same basis, we can also divide the perturbation matrix $\chi$ and the first-order energy $\mathcal{H}_1$ in the same block matrix form:
 
-\begin{align*}
+\begin{equation*}
+\qquad \chi = 
+\left(\begin{array}{cc}
+\chi^{11} & \chi^{12} \\
+\chi^{21} & \chi^{22}
+\end{array}\right),
+\qquad \mathcal{H}_1 = 
+\left(\begin{array}{cc}
+\mathcal{H}_1^{11} & \mathcal{H}_1^{12} \\
+\mathcal{H}_1^{21} & \mathcal{H}_1^{22}
+\end{array}\right)
+\end{equation*}
+
+\noindent Ultimately, by using the equations \ref{eqn:densities}, we arrive at the result:
+
+\begin{align}\label{eqn:chi-rdot_uncranked}
+\begin{aligned}
 \hbar \dot{\mathcal{R}}_{(0),ab}^{11} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{11} + (f_b-f_a)\mathcal{H}^{11}_{(1),ab} \\
 \hbar \dot{\mathcal{R}}_{(0),ab}^{12} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{12} + \left(1-(f_a+f_b)\right)\mathcal{H}^{12}_{(1),ab} \\
 \hbar \dot{\mathcal{R}}_{(0),ab}^{21} &= (E_a+E_b)\left(1-(f_a+f_b)\right)\chi_{ab}^{21} - \left(1-(f_a+f_b)\right)\mathcal{H}^{21}_{(1),ab} \\
 \hbar \dot{\mathcal{R}}_{(0),ab}^{22} &= (E_a-E_b)(f_b-f_a)\chi_{ab}^{22} - (f_b-f_a)\mathcal{H}^{22}_{(1),ab}
-\end{align*}
+\end{aligned}
+\end{align}
 
-It is common (the so-called "cranking approximation") to assume that changes in the density have approximately no effect on the mean field, in which case these relations reduce to
+It is common (the so-called ``cranking approximation") to assume that changes in the density have approximately no effect on the mean field, in which case these relations reduce to
 
 \begin{tcolorbox}
 \begin{align}\label{eqn:chi-rdot}
@@ -163,9 +180,20 @@ It is common (the so-called "cranking approximation") to assume that changes in 
 \end{align}
 \end{tcolorbox}
 
+\noindent\textit{Sanity Check:} In the $T=f=0$ case, the $^{11}$ and $^{22}$ terms vanish completely and we are left with the familiar [zero-temperature] ATDHFB equations:
+
+\begin{align*}
+\hbar \dot{\mathcal{R}}_{(0),ab}^{12} &= (E_a+E_b)\chi_{ab}^{12} + \mathcal{H}^{12}_{(1),ab} \\
+\hbar \dot{\mathcal{R}}_{(0),ab}^{21} &= (E_a+E_b)\chi_{ab}^{21} - \mathcal{H}^{21}_{(1),ab}
+\end{align*}
+
+Another thing we must be careful of is the case of degenerate states. In such an event, $E_a=E_b$ and $f_a=f_b$, leading again to $\mathcal{\dot{R}}^{11}_{(0),ab}=\mathcal{\dot{R}}^{22}_{(0),ab}=0$ (but I emphasize that this is only for this particular pair of states $|a\rangle$ and $|b\rangle$).
+
+A third, rather pedantic case to be aware of is the example of a two-state system. In that case, $f_a+f_b=1$ and then the opposite happens; namely, $\mathcal{\dot{R}}^{12}_{(0),ab}=\mathcal{\dot{R}}^{21}_{(0),ab}=0$ while $\mathcal{\dot{R}}^{11}_{(0),ab}\neq0, \mathcal{\dot{R}}^{22}_{(0),ab}\neq0$
+
 \subsection{Kinetic Energy at Finite Temperature}
 
-As mentioned previously, the expression for the "kinetic" energy of the system is given by:
+As mentioned previously, the expression for the ``kinetic" energy of the system is given by:
 
 \begin{equation*}
 E_{kin}(\mathcal{R}) = \frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) + \frac{1}{4}\mathrm{Tr}\left(\mathcal{H}_1\mathcal{R}_1\right)
@@ -235,16 +263,16 @@ A_{\mu\nu}-\left\{A,D\right\}_{\mu\nu} &= (1-D_\mu-D_\nu)A_{\mu\nu}
 
 \noindent where everything that isn't a $\chi$ has just been kind of absorbed into a single coefficient.
 
-Let's pause here for just a second and think about what we just did. Remember that our goal all along has been to treat this piece of the energy as sort of a "kinetic energy term" describing motion in a space of collective shape deformation coordinates. Then just now we found that, sure enough, we can factor this particular chunk into something that looks \textit{kind of} like $\frac{1}{2}mv^2$. And we already know from \ref{eqn:chi-rdot} that $\chi$ is related to $\mathcal{\dot{R}}_0$. Eventually we'll try to relate $\mathcal{\dot{R}}_0$ to the collective shape coordinates $\dot{q}$, but first let's see if we can't get the other piece of the kinetic energy into the same form.
+Let's pause here for just a second and think about what we just did. Remember that our goal all along has been to treat this piece of the energy as sort of a ``kinetic energy term" describing motion in a space of collective shape deformation coordinates. Then just now we found that, sure enough, we can factor this particular chunk into something that looks \textit{kind of} like $\frac{1}{2}mv^2$. And we already know from \ref{eqn:chi-rdot} that $\chi$ is related to $\mathcal{\dot{R}}_0$. Eventually we'll try to relate $\mathcal{\dot{R}}_0$ to the collective shape coordinates $\dot{q}$, but first let's see if we can't get the other piece of the kinetic energy into the same form.
 
 \subsubsection{Term proportional to $\mathcal{R}_1$}
 
 Recall that $\mathcal{R}_1 = i\left[\chi, \mathcal{R}_0\right]$; then we can almost copy from equation \ref{eqn:H0R2} of the previous section:
 
 \begin{align}\label{eqn:H1R1}
-\frac{1}{4}\mathrm{Tr}\left(\mathcal{H}_{1}\mathcal{R}_{1}\right) = \frac{i}{4}&\mathrm{Tr} \left(\mathcal{H}_{1}^{11}[\chi^{11},f] - \mathcal{H}_{1}^{12}(\chi^{21}-\{\chi^{21},f\}) \right. \\
-&\left.+ \mathcal{H}_{1}^{21}(\chi^{12}-\{\chi^{12},f\}) - \mathcal{H}_{1}^{22}[\chi^{22},f]\right) \\
-= \frac{i}{4}& \left(\mathcal{H}_{(1),ab}^{11}(f_a-f_b)\chi^{11}_{ba} - \mathcal{H}_{(1),ab}^{12}(1-f_a-f_b)\chi^{21}_{ba} \right. \\
+\frac{1}{4}\mathrm{Tr}\left(\mathcal{H}_{1}\mathcal{R}_{1}\right) = \frac{i}{4}&\mathrm{Tr} \left(\mathcal{H}_{1}^{11}[\chi^{11},f] - \mathcal{H}_{1}^{12}(\chi^{21}-\{\chi^{21},f\}) \right. \nonumber\\
+&\left.+ \mathcal{H}_{1}^{21}(\chi^{12}-\{\chi^{12},f\}) - \mathcal{H}_{1}^{22}[\chi^{22},f]\right) \nonumber\\
+= \frac{i}{4}& \left(\mathcal{H}_{(1),ab}^{11}(f_a-f_b)\chi^{11}_{ba} - \mathcal{H}_{(1),ab}^{12}(1-f_a-f_b)\chi^{21}_{ba} \right. \nonumber\\
 &\left.+ \mathcal{H}_{(1),ab}^{21}(1-f_a-f_b)\chi^{12}_{ba} - \mathcal{H}_{(1),ab}^{22}(f_a-f_b)\chi^{22}_{ba}\right)
 \end{align}
 
@@ -368,7 +396,7 @@ Looking back to \ref{eqn:H1R1}, we see that we can write it in the same form as 
 \begin{tcolorbox}
 \begin{align}\label{eqn:H1R1_inertia}
 \begin{aligned}
-\frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = &
+\frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_1\mathcal{R}_1\right) = &
  \mathcal{\bar{M''}}^{11,11}_{\alpha\beta ab}\chi^{11}_{\alpha\beta}\chi^{11}_{ba} +
  \mathcal{\bar{M''}}^{12,11}_{\alpha\beta ab}\chi^{12}_{\alpha\beta}\chi^{11}_{ba} +
  \mathcal{\bar{M''}}^{21,11}_{\alpha\beta ab}\chi^{21}_{\alpha\beta}\chi^{11}_{ba} +
@@ -410,11 +438,34 @@ Expressions \ref{eqn:H0R2_inertia} and \ref{eqn:H1R1_inertia} can be combined in
 E_{kin} \sim \frac{1}{2}\chi^\dagger\mathcal{\bar{M}}\chi
 \end{equation}
 
-You can use equations \ref{eqn:chi-rdot} to change variables to $\mathcal{\dot{R}}_0$ instead of $\chi$, but I'm going to skip that for now because what we really want is to use $\dot{q}$ and I'm running out of $\mathcal{M}$'s.
+You can use equations \ref{eqn:chi-rdot_uncranked} or \ref{eqn:chi-rdot} to change variables to $\mathcal{\dot{R}}_0$ instead of $\chi$, but I'm going to skip that for now because what we really want is to use $\dot{q}$ and I'm running out of $\mathcal{M}$'s.
+
+\noindent\textit{Sanity Check:} As in the case of the ATDHFB equations from section \ref{sect:chi-rdot}, in the $T=f=0$ case, the $^{11}$ and $^{22}$ terms vanish completely in the lines leading up to \ref{eqn:H0R2_inertia} and \ref{eqn:H1R1_inertia} and we are left with familiar [zero-temperature] ATDHFB expressions. In essence, the rank of the problem reduces from dealing with a 4x4 matrix to dealing with a 2x2 matrix. And actually, since $\chi$, $\mathcal{H}$, and $\mathcal{R}$ are all Hermitian (implying $\chi^{12}=\chi^{21\dagger}, \mathcal{H}^{12}=\mathcal{H}^{21\dagger}, \mathcal{R}^{12}=\mathcal{R}^{21\dagger}$), then we can further reduce the computational overhead by exploiting this symmetry.
+
+\subsection{The FT-QRPA Matrix}
+
+Putting the whole thing together...
+
+\begin{sidewaystable}
+\begin{equation}
+\mathcal{\bar{M}} = \frac{1}{4}\left(\begin{array}{cccc}
+(E_b-E_a)(f_a-f_b) +  i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} J_{ij\alpha\beta}^{11} + U_{ai}^\dagger V_{jb} \frac{M_{ij\alpha\beta}^{11}}{2} + V_{ai}^\dagger U_{jb} \frac{M_{ij\alpha\beta}^{11*}}{2} + V_{ai}^\dagger V_{jb} J_{ij\alpha\beta}^{11*}  \right)(f_\beta-f_\alpha) & 0                    &                     0 & 0 \\
+i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} K_{ij\alpha\beta}^{12} + U_{ai}^\dagger V_{jb} \frac{L_{ij\alpha\beta}^{12}}{2} - V_{ai}^\dagger U_{jb} \frac{L_{ij\alpha\beta}^{21*}}{2} + V_{ai}^\dagger V_{jb} K_{ij\alpha\beta}^{21*}  \right)\left(1-f_\alpha-f_\beta\right)  & 0                    & -(E_a+E_b)(1-f_a-f_b) & 0 \\
+i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} K_{ij\alpha\beta}^{21} + U_{ai}^\dagger V_{jb} \frac{L_{ij\alpha\beta}^{21}}{2} - V_{ai}^\dagger U_{jb} \frac{L_{ij\alpha\beta}^{12*}}{2} + V_{ai}^\dagger V_{jb} K_{ij\alpha\beta}^{12*}  \right)\left(1-f_\alpha-f_\beta\right)  & (E_a+E_b)(1-f_a-f_b) & 0                     & 0 \\
+i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} J_{ij\alpha\beta}^{22} + U_{ai}^\dagger V_{jb} \frac{M_{ij\alpha\beta}^{22}}{2} + V_{ai}^\dagger U_{jb} \frac{M_{ij\alpha\beta}^{22*}}{2} + V_{ai}^\dagger V_{jb} J_{ij\alpha\beta}^{22*}  \right)(f_\beta-f_\alpha)               & 0                    & 0                     & -(E_b-E_a)(f_a-f_b)
+\end{array}\right)
+\end{equation}
+\end{sidewaystable}
+
+If we look back to the [uncranked] expression relating $\chi$ and $\mathcal{\dot{R}}$ in \ref{eqn:chi-rdot_uncranked}, we can plug in the $\mathcal{H}_1$ expressions we just derived to relate $\chi$ and
+
+\subsection{The Inertia Tensor}
+
+Now that we have an expression for the energy in terms of an inertia tensor $\mathcal{\bar{M}}$ and the expansion parameter $\chi$. We already know that $\chi$ is related to time-dependent changes in the density $\mathcal{\dot{R}}_0$; now let us further try to relate $\chi$ to changes in the collective shape multipole moments of the nucleus.
 
 \subsubsection{Cranking Approximation}
 
-We already introduced the cranking approximation briefly in section \ref{sect:chi-rdot} to simplify the relation between $\chi$ and $\mathcal{\dot{R}}_0$ when we assumed that changes in the density will have approximately no affect on the mean field ($\mathcal{H}_1 \approx 0$). We can apply this to the energy expression, and then the inertia tensor is pretty simple:
+We already introduced the cranking approximation briefly in section \ref{sect:chi-rdot} to simplify the relation between $\chi$ and $\mathcal{\dot{R}}_0$ when we assumed that changes in the density will have approximately no effect on the mean field ($\mathcal{H}_1 \approx 0$). We can apply this to the energy expression, and then the inertia tensor is pretty simple:
 
 \begin{equation}
 \mathcal{\bar{M}} = \frac{1}{4}\left(\begin{array}{cccc}
@@ -425,9 +476,7 @@ We already introduced the cranking approximation briefly in section \ref{sect:ch
 \end{array}\right)
 \end{equation}
 
-\subsection{The Inertia Tensor}
-
-Now that we have an expression for the energy in terms of an inertia tensor $\mathcal{\bar{M}}$ and the expansion parameter $\chi$. We already know that $\chi$ is related to time-dependent changes in the density $\mathcal{\dot{R}}_0$; now let us further try to relate $\chi$ to changes in the collective shape multipole moments of the nucleus.
+\subsubsection{The Collective Shape Space}
 
 Suppose there is a set of collective variables $(q_1,q_2,\dots,q_n)$ which describe changes in the density $\mathcal{R}_0(t)$ at all times $t$. Then
 
@@ -443,6 +492,8 @@ Suppose there is a set of collective variables $(q_1,q_2,\dots,q_n)$ which descr
 \chi^{21}_{ab} &= \sum_{\mu=1}^{n}\frac{\hbar\dot{q_\mu}}{(E_a+E_b)(1-f_a-f_b)}\frac{\partial\mathcal{R}^{21}_{(0),ab}}{\partial q_\mu} \\
 \chi^{22}_{ab} &= \sum_{\mu=1}^{n}\frac{\hbar\dot{q_\mu}}{(E_a-E_b)(f_b-f_a)}\frac{\partial\mathcal{R}^{22}_{(0),ab}}{\partial q_\mu} \\
 \end{align*}
+
+\noindent Of course, we should be careful here if the temperature is allowed to approach zero. In that case, then from equation \ref{eqn:chi-rdot} we see that $\mathcal{\dot{R}}^{11}=\mathcal{\dot{R}}^{22}=0$. We should not have any $\chi^{11}$ or $\chi^{22}$ terms in the zero temperature case. The final form of the inertia tensor will also be affected. Likewise we should be careful not to divide by zero in the case of $E_a=E_b$ as mentioned earlier at the end of section \ref{sect:chi-rdot}. Everything should work out fine since $\chi^{11}$ and $\chi^{22}$ are [potentially] finite numbers which are then multiplied by zero in the expression for $\mathcal{\bar{M}}$, but just be careful.
 
 If we take this now and plug it into our energy expression \ref{eqn:H0R2_inertia}, the following is what happens:
 
@@ -463,12 +514,14 @@ E_{kin} \approx \frac{1}{2}\sum_{\mu\nu}\dot{q}_\mu\dot{q}_\nu\mathsf{M}_{\mu\nu
 \end{align}
 \end{tcolorbox}
 
+\noindent In the zero temperature case, the first chunk (involving $\mathcal{R}^{11}$ and $\mathcal{R}^{22}$) should be replaced with zero.
+
 \section{Fission at finite temperature}
 
 There are several complications associated with considering a nucleus at finite temperature. I'd like to discuss first of all what that even means and why it is significant, and then I'll talk about some of the challenges of this approach.
 
-The idea of considering fission as a finite temperature process stems from trying to develop a picture of induced fission. In induced fission, a neutron which carries some amount of energy is captured by a heavy nucleus in its ground state. That extra energy's gotta go somewhere, but where? In a large nucleus, you have all sorts of places, including any number of single particle excitations, or combination of single particle excitations, or perhaps the entire nucleus moves together as one large collective excitation. Apparently some people went through and did the combinatorics of these possible excitations and decided that the number of them was huge (like, $~10^{12}$ huge) \cite{Hilaire2012}. So handling them explicitly just isn't going to work.
+The idea of considering fission as a finite temperature process stems from trying to develop a picture of induced fission. In induced fission, a neutron which carries some amount of energy is captured by a heavy nucleus in its ground state. That extra energy's gotta go somewhere, but where? In a large nucleus, you have all sorts of places, including any number of single particle excitations, or combination of single particle excitations, or perhaps the entire nucleus moves together as one large collective excitation. Apparently some people went through and did the combinatorics of these possible excitations and decided that the number of them was huge (like, $\sim10^{12}$ huge) \cite{Hilaire2012}. So handling them explicitly just isn't going to work.
 
-Additionally, DFT might not be the best tool for performing finite-temperature calculations. This is because DFT is typically implemented as a variational method, which means it's good for ground state calculations. But highly-deformed nuclei are inherently \textit{not} in their ground state. In fact, this is true even for "zero-temperature" DFT as well. In practice the results we get are pretty good (most likely the system has time to equilibriate to its "deformed ground state" at each deformation step, or in other words the path to scission proceeds ~adiabatically), but it's something to definitely keep in mind that (I suspect) could strongly affect your half-life predictions and fragment energies in particular. Furthermore, it's not clear to me how you might correct that should the need arise.
+Additionally, DFT might not be the best tool for performing finite-temperature calculations. This is because DFT is typically implemented as a variational method, which means it's good for ground state calculations. But highly-deformed nuclei are inherently \textit{not} in their ground state. In fact, this is true even for ``zero-temperature" DFT as well. In practice the results we get are pretty good (most likely the system has time to equilibriate to its ``deformed ground state" at each deformation step, or in other words the path to scission proceeds $\sim$adiabatically), but it's something to definitely keep in mind that (I suspect) could strongly affect your half-life predictions and fragment energies in particular. Furthermore, it's not clear to me how you might correct that should the need arise.
 
 A third thing that Nicolas claims is that the temperature should depend on the actual deformation. I'm not sure where exactly this comes from but it sounds plausible to me. The thing that really gets me is that he then does some voodoo black magic to conclude that in FT-DFT, we have to assume that T is constant across the entire PES. That I'm not understanding and I'll have to ask him about that when he gets back.
