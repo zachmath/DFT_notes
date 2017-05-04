@@ -1,0 +1,140 @@
+\documentclass[a4paper,12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,latexsym}
+\usepackage{graphicx,subfigure}
+\usepackage{tcolorbox}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[margin=2.5cm]{geometry}
+\newtheorem{Equation}{\indent Equation}[section]
+\textwidth=6in
+\renewcommand{\baselinestretch}{1.5}
+\begin{document}
+The whole mess written out is:
+
+\begin{align*}
+\mathcal{H}_{(1),pq}^{11} &= \left(U_{pi}^\dagger U_{jq} J_{ij\alpha\beta}^{11} + U_{pi}^\dagger V_{jq} \frac{M_{ij\alpha\beta}^{11}}{2} \right)[\chi^{11},f]_{\alpha\beta} -
+ \left(V_{pi}^\dagger U_{jq} \frac{M_{ij\alpha\beta}^{11*}}{2} + V_{pi}^\dagger V_{jq} J_{ij\alpha\beta}^{11*}  \right)[\chi^{11},f]^*_{\alpha\beta} \\
+&+ \left(U_{pi}^\dagger U_{jq} J_{ij\alpha\beta}^{22} + U_{pi}^\dagger V_{jq} \frac{M_{ij\alpha\beta}^{22}}{2} \right)[\chi^{22},f]_{\alpha\beta} -
+ \left(V_{pi}^\dagger U_{jq} \frac{M_{ij\alpha\beta}^{22*}}{2} + V_{pi}^\dagger V_{jq} J_{ij\alpha\beta}^{22*}  \right)[\chi^{22},f]^*_{\alpha\beta} \\
+&+ \left(U_{pi}^\dagger U_{jq} K_{ij\alpha\beta}^{12} + U_{pi}^\dagger V_{jq} \frac{L_{ij\alpha\beta}^{12}}{2} \right)\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)_{\alpha\beta} \\ &\qquad\qquad\qquad\qquad\qquad\qquad\qquad-
+ \left(V_{pi}^\dagger U_{jq} \frac{L_{ij\alpha\beta}^{12*}}{2} + V_{pi}^\dagger V_{jq} K_{ij\alpha\beta}^{12*}  \right)\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)^*_{\alpha\beta} \\
+&+ \left(U_{pi}^\dagger U_{jq} K_{ij\alpha\beta}^{21} + U_{pi}^\dagger V_{jq} \frac{L_{ij\alpha\beta}^{21}}{2} \right)\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)_{\alpha\beta} \\ &\qquad\qquad\qquad\qquad\qquad\qquad\qquad-
+ \left(V_{pi}^\dagger U_{jq} \frac{L_{ij\alpha\beta}^{21*}}{2} + V_{pi}^\dagger V_{jq} K_{ij\alpha\beta}^{21*}  \right)\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)^*_{\alpha\beta}
+\end{align*}
+\begin{align*}
+\mathcal{H}_{(1),pq}^{12} &= \left(U_{pi}^\dagger V^*_{jq} J_{ij\alpha\beta}^{11} + U_{pi}^\dagger U^*_{jq} \frac{M_{ij\alpha\beta}^{11}}{2} \right)[\chi^{11},f]_{\alpha\beta} -
+ \left(V_{pi}^\dagger V^*_{jq} \frac{M_{ij\alpha\beta}^{11*}}{2} + V_{pi}^\dagger U^*_{jq} J_{ij\alpha\beta}^{11*}  \right)[\chi^{11},f]^*_{\alpha\beta} \\
+&+ \left(U_{pi}^\dagger V^*_{jq} J_{ij\alpha\beta}^{22} + U_{pi}^\dagger U^*_{jq} \frac{M_{ij\alpha\beta}^{22}}{2} \right)[\chi^{22},f]_{\alpha\beta} -
+ \left(V_{pi}^\dagger V^*_{jq} \frac{M_{ij\alpha\beta}^{22*}}{2} + V_{pi}^\dagger U^*_{jq} J_{ij\alpha\beta}^{22*}  \right)[\chi^{22},f]^*_{\alpha\beta} \\
+&+ \left(U_{pi}^\dagger V^*_{jq} K_{ij\alpha\beta}^{12} + U_{pi}^\dagger U^*_{jq} \frac{L_{ij\alpha\beta}^{12}}{2} \right)\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)_{\alpha\beta} \\ &\qquad\qquad\qquad\qquad\qquad\qquad\qquad-
+ \left(V_{pi}^\dagger V^*_{jq} \frac{L_{ij\alpha\beta}^{12*}}{2} + V_{pi}^\dagger U^*_{jq} K_{ij\alpha\beta}^{12*}  \right)\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)^*_{\alpha\beta} \\
+&+ \left(U_{pi}^\dagger V^*_{jq} K_{ij\alpha\beta}^{21} + U_{pi}^\dagger U^*_{jq} \frac{L_{ij\alpha\beta}^{21}}{2} \right)\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)_{\alpha\beta} \\ &\qquad\qquad\qquad\qquad\qquad\qquad\qquad-
+ \left(V_{pi}^\dagger V^*_{jq} \frac{L_{ij\alpha\beta}^{21*}}{2} + V_{pi}^\dagger U^*_{jq} K_{ij\alpha\beta}^{21*}  \right)\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)^*_{\alpha\beta}
+\end{align*}
+\begin{align*}
+\mathcal{H}_{(1),pq}^{21} &= \left(V^T_{pi} U_{jq} J_{ij\alpha\beta}^{11} + V_{pi}^T V_{jq} \frac{M_{ij\alpha\beta}^{11}}{2} \right)[\chi^{11},f]_{\alpha\beta} -
+ \left(U_{pi}^T U_{jq} \frac{M_{ij\alpha\beta}^{11*}}{2} + U_{pi}^T V_{jq} J_{ij\alpha\beta}^{11*}  \right)[\chi^{11},f]^*_{\alpha\beta} \\
+&+ \left(V_{pi}^T U_{jq} J_{ij\alpha\beta}^{22} + V_{pi}^T V_{jq} \frac{M_{ij\alpha\beta}^{22}}{2} \right)[\chi^{22},f]_{\alpha\beta} -
+ \left(U_{pi}^T U_{jq} \frac{M_{ij\alpha\beta}^{22*}}{2} + U_{pi}^T V_{jq} J_{ij\alpha\beta}^{22*}  \right)[\chi^{22},f]^*_{\alpha\beta} \\
+&+ \left(V_{pi}^T U_{jq} K_{ij\alpha\beta}^{12} + V_{pi}^T V_{jq} \frac{L_{ij\alpha\beta}^{12}}{2} \right)\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)_{\alpha\beta} \\ &\qquad\qquad\qquad\qquad\qquad\qquad\qquad-
+ \left(U_{pi}^T U_{jq} \frac{L_{ij\alpha\beta}^{12*}}{2} + U_{pi}^T V_{jq} K_{ij\alpha\beta}^{12*}  \right)\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)^*_{\alpha\beta} \\
+&+ \left(V_{pi}^T U_{jq} K_{ij\alpha\beta}^{21} + V_{pi}^T V_{jq} \frac{L_{ij\alpha\beta}^{21}}{2} \right)\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)_{\alpha\beta} \\ &\qquad\qquad\qquad\qquad\qquad\qquad\qquad-
+ \left(U_{pi}^T U_{jq} \frac{L_{ij\alpha\beta}^{21*}}{2} + U_{pi}^T V_{jq} K_{ij\alpha\beta}^{21*}  \right)\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)^*_{\alpha\beta}
+\end{align*}
+\begin{align*}
+\mathcal{H}_{(1),pq}^{22} &= \left(V_{pi}^T V^*_{jq} J_{ij\alpha\beta}^{11} + V_{pi}^T U^*_{jq} \frac{M_{ij\alpha\beta}^{11}}{2} \right)[\chi^{11},f]_{\alpha\beta} -
+ \left(U_{pi}^T V^*_{jq} \frac{M_{ij\alpha\beta}^{11*}}{2} + U_{pi}^T U^*_{jq} J_{ij\alpha\beta}^{11*}  \right)[\chi^{11},f]^*_{\alpha\beta} \\
+&+ \left(V_{pi}^T V^*_{jq} J_{ij\alpha\beta}^{22} + V_{pi}^T U^*_{jq} \frac{M_{ij\alpha\beta}^{22}}{2} \right)[\chi^{22},f]_{\alpha\beta} -
+ \left(U_{pi}^T V^*_{jq} \frac{M_{ij\alpha\beta}^{22*}}{2} + U_{pi}^T U^*_{jq} J_{ij\alpha\beta}^{22*}  \right)[\chi^{22},f]^*_{\alpha\beta} \\
+&+ \left(V_{pi}^T V^*_{jq} K_{ij\alpha\beta}^{12} + V_{pi}^T U^*_{jq} \frac{L_{ij\alpha\beta}^{12}}{2} \right)\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)_{\alpha\beta} \\ &\qquad\qquad\qquad\qquad\qquad\qquad\qquad-
+ \left(U_{pi}^T V^*_{jq} \frac{L_{ij\alpha\beta}^{12*}}{2} + U_{pi}^T U^*_{jq} K_{ij\alpha\beta}^{12*}  \right)\left(\chi^{12}-\left\{\chi^{12},f\right\}\right)^*_{\alpha\beta} \\
+&+ \left(V_{pi}^T V^*_{jq} K_{ij\alpha\beta}^{21} + V_{pi}^T U^*_{jq} \frac{L_{ij\alpha\beta}^{21}}{2} \right)\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)_{\alpha\beta} \\ &\qquad\qquad\qquad\qquad\qquad\qquad\qquad-
+ \left(U_{pi}^T V^*_{jq} \frac{L_{ij\alpha\beta}^{21*}}{2} + U_{pi}^T U^*_{jq} K_{ij\alpha\beta}^{21*}  \right)\left(\chi^{21}-\left\{\chi^{21},f\right\}\right)^*_{\alpha\beta}
+\end{align*}
+
+
+\begin{sidewaystable}
+\begin{equation}
+\mathcal{\bar{M}}_{:1} = \frac{1}{4}\left(\begin{array}{c}
+(E_b-E_a)(f_a-f_b) + i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} J_{ij\alpha\beta}^{11} + U_{ai}^\dagger V_{jb} \frac{M_{ij\alpha\beta}^{11}}{2} + V_{ai}^\dagger U_{jb} \frac{M_{ij\alpha\beta}^{11*}}{2} + V_{ai}^\dagger V_{jb} J_{ij\alpha\beta}^{11*}  \right)(f_\beta-f_\alpha)                                                    \\
+-i(1-f_a-f_b)\left(U_{ai}^\dagger V^*_{jb} J_{ij\alpha\beta}^{11} + U_{ai}^\dagger U^*_{jb} \frac{M_{ij\alpha\beta}^{11}}{2} + V_{ai}^\dagger V^*_{jb} \frac{M_{ij\alpha\beta}^{11*}}{2} + V_{ai}^\dagger U^*_{jb} J_{ij\alpha\beta}^{11*}  \right)(f_\beta-f_\alpha)                                                    \\
+i(1-f_a-f_b)\left(V^T_{ai} U_{jb} J_{ij\alpha\beta}^{11} + V_{ai}^T V_{jb} \frac{M_{ij\alpha\beta}^{11}}{2} + U_{ai}^T U_{jb} \frac{M_{ij\alpha\beta}^{11*}}{2} + U_{ai}^T V_{jb} J_{ij\alpha\beta}^{11*}  \right)(f_\beta-f_\alpha)   \\
+-i(f_a-f_b)\left(V_{ai}^T V^*_{jb} J_{ij\alpha\beta}^{11} + V_{ai}^T U^*_{jb} \frac{M_{ij\alpha\beta}^{11}}{2} + U_{ai}^T V^*_{jb} \frac{M_{ij\alpha\beta}^{11*}}{2} + U_{ai}^T U^*_{jb} J_{ij\alpha\beta}^{11*}  \right)(f_\beta-f_\alpha)
+\end{array}\right)
+\end{equation}
+\begin{equation}
+\mathcal{\bar{M}}_{:2} = \frac{1}{4}\left(\begin{array}{c}
+i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} K_{ij\alpha\beta}^{12} + U_{ai}^\dagger V_{jb} \frac{L_{ij\alpha\beta}^{12}}{2} - V_{ai}^\dagger U_{jb} \frac{L_{ij\alpha\beta}^{21*}}{2} + V_{ai}^\dagger V_{jb} K_{ij\alpha\beta}^{21*}  \right)\left(1-f_\alpha-f_\beta\right)                                                                \\
+-(E_a+E_b)(1-f_a-f_b) - i(1-f_a-f_b)\left(U_{ai}^\dagger V^*_{jb} K_{ij\alpha\beta}^{12} + U_{ai}^\dagger U^*_{jb} \frac{L_{ij\alpha\beta}^{12}}{2} - V_{ai}^\dagger V^*_{jb} \frac{L_{ij\alpha\beta}^{21*}}{2} + V_{ai}^\dagger U^*_{jb} K_{ij\alpha\beta}^{21*}  \right)\left(1-f_\alpha-f_\beta\right)                                       \\
+i(1-f_a-f_b)\left(V_{ai}^T U_{jb} K_{ij\alpha\beta}^{12} + V_{ai}^T V_{jb} \frac{L_{ij\alpha\beta}^{12}}{2} - U_{ai}^T U_{jb} \frac{L_{ij\alpha\beta}^{21*}}{2} + U_{ai}^T V_{jb} K_{ij\alpha\beta}^{21*}  \right)\left(1-f_\alpha-f_\beta\right)                                                                \\
+-i(f_a-f_b)\left(V_{ai}^T V^*_{jb} K_{ij\alpha\beta}^{12} + V_{ai}^T U^*_{jb} \frac{L_{ij\alpha\beta}^{12}}{2} - U_{ai}^T V^*_{jb} \frac{L_{ij\alpha\beta}^{21*}}{2} + U_{ai}^T U^*_{jb} K_{ij\alpha\beta}^{21*}  \right)\left(1-f_\alpha-f_\beta\right)
+\end{array}\right)
+\end{equation}
+\begin{equation}
+\mathcal{\bar{M}}_{:3} = \frac{1}{4}\left(\begin{array}{c}
+i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} K_{ij\alpha\beta}^{21} + U_{ai}^\dagger V_{jb} \frac{L_{ij\alpha\beta}^{21}}{2} - V_{ai}^\dagger U_{jb} \frac{L_{ij\alpha\beta}^{12*}}{2} + V_{ai}^\dagger V_{jb} K_{ij\alpha\beta}^{12*}  \right)\left(1-f_\alpha-f_\beta\right)                                                                  \\
+-i(1-f_a-f_b)\left(U_{ai}^\dagger V^*_{jb} K_{ij\alpha\beta}^{21} + U_{ai}^\dagger U^*_{jb} \frac{L_{ij\alpha\beta}^{21}}{2} - V_{ai}^\dagger V^*_{jb} \frac{L_{ij\alpha\beta}^{12*}}{2} + V_{ai}^\dagger U^*_{jb} K_{ij\alpha\beta}^{12*}  \right)\left(1-f_\alpha-f_\beta\right)                                         \\
+(E_a+E_b)(1-f_a-f_b) + i(1-f_a-f_b)\left(V_{ai}^T U_{jb} K_{ij\alpha\beta}^{21} + V_{ai}^T V_{jb} \frac{L_{ij\alpha\beta}^{21}}{2} - U_{ai}^T U_{jb} \frac{L_{ij\alpha\beta}^{12*}}{2} + U_{ai}^T V_{jb} K_{ij\alpha\beta}^{12*}  \right)\left(1-f_\alpha-f_\beta\right)                                         \\
+-i(f_a-f_b)\left(V_{ai}^T V^*_{jb} K_{ij\alpha\beta}^{21} + V_{ai}^T U^*_{jb} \frac{L_{ij\alpha\beta}^{21}}{2} - U_{ai}^T V^*_{jb} \frac{L_{ij\alpha\beta}^{12*}}{2} + U_{ai}^T U^*_{jb} K_{ij\alpha\beta}^{12*}  \right)\left(1-f_\alpha-f_\beta\right)
+\end{array}\right)
+\end{equation}
+\begin{equation}
+\mathcal{\bar{M}}_{:4} = \frac{1}{4}\left(\begin{array}{c}
+i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} J_{ij\alpha\beta}^{22} + U_{ai}^\dagger V_{jb} \frac{M_{ij\alpha\beta}^{22}}{2} + V_{ai}^\dagger U_{jb} \frac{M_{ij\alpha\beta}^{22*}}{2} + V_{ai}^\dagger V_{jb} J_{ij\alpha\beta}^{22*}  \right)(f_\beta-f_\alpha)                                                                               \\
+-i(1-f_a-f_b)\left(U_{ai}^\dagger V^*_{jb} J_{ij\alpha\beta}^{22} + U_{ai}^\dagger U^*_{jb} \frac{M_{ij\alpha\beta}^{22}}{2} + V_{ai}^\dagger V^*_{jb} \frac{M_{ij\alpha\beta}^{22*}}{2} + V_{ai}^\dagger U^*_{jb} J_{ij\alpha\beta}^{22*}  \right)(f_\beta-f_\alpha)                                                      \\
+i(1-f_a-f_b)\left(V_{ai}^T U_{jb} J_{ij\alpha\beta}^{22} + V_{ai}^T V_{jb} \frac{M_{ij\alpha\beta}^{22}}{2} + U_{ai}^T U_{jb} \frac{M_{ij\alpha\beta}^{22*}}{2} + U_{ai}^T V_{jb} J_{ij\alpha\beta}^{22*}  \right)(f_\beta-f_\alpha)\\
+-(E_b-E_a)(f_a-f_b) - i(f_a-f_b)\left(V_{ai}^T V^*_{jb} J_{ij\alpha\beta}^{22} + V_{ai}^T U^*_{jb} \frac{M_{ij\alpha\beta}^{22}}{2} + U_{ai}^T V^*_{jb} \frac{M_{ij\alpha\beta}^{22*}}{2} + U_{ai}^T U^*_{jb} J_{ij\alpha\beta}^{22*}  \right)(f_\beta-f_\alpha)
+\end{array}\right)
+\end{equation}
+\end{sidewaystable}
+
+\begin{tcolorbox}
+\begin{align*}
+J^{11}_{ij\alpha\beta} = i\bar{v}_{ikjl}U_{l\alpha}U^\dagger_{\beta k} &\qquad J^{22}_{ij\alpha\beta} = -i\bar{v}_{ikjl}V^*_{l\alpha}V^T_{\beta k} \\
+K^{12}_{ij\alpha\beta} = i\bar{v}_{ikjl}U_{l\alpha}V^T_{\beta k} &\qquad K^{21}_{ij\alpha\beta} = -i\bar{v}_{ikjl}V^*_{l\alpha}U^\dagger_{\beta k} \\
+L^{12}_{ij\alpha\beta} = i\bar{v}_{ijkl}U_{l\alpha}U^T_{\beta k} &\qquad L^{21}_{ij\alpha\beta} = -i\bar{v}_{ijkl}V^*_{l\alpha}V^\dagger_{\beta k} \\
+M^{11}_{ij\alpha\beta} = i\bar{v}_{ijkl}U_{l\alpha}V^\dagger_{\beta k} &\qquad M^{22}_{ij\alpha\beta} = -i\bar{v}_{ijkl}V^*_{l\alpha}U^T_{\beta k} \\
+J^{11*}_{ij\alpha\beta} = -i\bar{v}_{ikjl}U^*_{l\alpha}U^T_{\beta k} &\qquad J^{22*}_{ij\alpha\beta} = i\bar{v}_{ikjl}V_{l\alpha}V^\dagger_{\beta k} \\
+K^{12*}_{ij\alpha\beta} = -i\bar{v}_{ikjl}U^*_{l\alpha}V^\dagger_{\beta k} &\qquad K^{21*}_{ij\alpha\beta} = i\bar{v}_{ikjl}V_{l\alpha}U^T_{\beta k} \\
+L^{12*}_{ij\alpha\beta} = -i\bar{v}_{ijkl}U^*_{l\alpha}U^\dagger_{\beta k} &\qquad L^{21*}_{ij\alpha\beta} = i\bar{v}_{ijkl}V_{l\alpha}V^T_{\beta k} \\
+M^{11*}_{ij\alpha\beta} = -i\bar{v}_{ijkl}U^*_{l\alpha}V^T_{\beta k} &\qquad M^{22*}_{ij\alpha\beta} = i\bar{v}_{ijkl}V_{l\alpha}U^\dagger_{\beta k}
+\end{align*}
+\end{tcolorbox}
+
+\begin{sidewaystable}
+\begin{equation}
+\mathcal{\bar{M}}_{:1} = \frac{1}{4}\left(\begin{array}{c}
+(E_b-E_a)(f_a-f_b) + i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} i\bar{v}_{ikjl}U_{l\alpha}U^\dagger_{\beta k} + U_{ai}^\dagger V_{jb} \frac{i\bar{v}_{ijkl}U_{l\alpha}V^\dagger_{\beta k}}{2} + V_{ai}^\dagger U_{jb} \frac{-i\bar{v}_{ijkl}U^*_{l\alpha}V^T_{\beta k}}{2} + V_{ai}^\dagger V_{jb} -i\bar{v}_{ikjl}U^*_{l\alpha}U^T_{\beta k}  \right)(f_\beta-f_\alpha)                                                    \\
+-i(1-f_a-f_b)\left(U_{ai}^\dagger V^*_{jb} i\bar{v}_{ikjl}U_{l\alpha}U^\dagger_{\beta k} + U_{ai}^\dagger U^*_{jb} \frac{i\bar{v}_{ijkl}U_{l\alpha}V^\dagger_{\beta k}}{2} + V_{ai}^\dagger V^*_{jb} \frac{-i\bar{v}_{ijkl}U^*_{l\alpha}V^T_{\beta k}}{2} + V_{ai}^\dagger U^*_{jb} -i\bar{v}_{ikjl}U^*_{l\alpha}U^T_{\beta k}  \right)(f_\beta-f_\alpha)                                                    \\
+i(1-f_a-f_b)\left(V^T_{ai} U_{jb} i\bar{v}_{ikjl}U_{l\alpha}U^\dagger_{\beta k} + V_{ai}^T V_{jb} \frac{i\bar{v}_{ijkl}U_{l\alpha}V^\dagger_{\beta k}}{2} + U_{ai}^T U_{jb} \frac{-i\bar{v}_{ijkl}U^*_{l\alpha}V^T_{\beta k}}{2} + U_{ai}^T V_{jb} -i\bar{v}_{ikjl}U^*_{l\alpha}U^T_{\beta k}  \right)(f_\beta-f_\alpha)   \\
+-i(f_a-f_b)\left(V_{ai}^T V^*_{jb} i\bar{v}_{ikjl}U_{l\alpha}U^\dagger_{\beta k} + V_{ai}^T U^*_{jb} \frac{i\bar{v}_{ijkl}U_{l\alpha}V^\dagger_{\beta k}}{2} + U_{ai}^T V^*_{jb} \frac{-i\bar{v}_{ijkl}U^*_{l\alpha}V^T_{\beta k}}{2} + U_{ai}^T U^*_{jb} -i\bar{v}_{ikjl}U^*_{l\alpha}U^T_{\beta k}  \right)(f_\beta-f_\alpha)
+\end{array}\right)
+\end{equation}
+\begin{equation}
+\mathcal{\bar{M}}_{:2} = \frac{1}{4}\left(\begin{array}{c}
+i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} i\bar{v}_{ikjl}U_{l\alpha}V^T_{\beta k} + U_{ai}^\dagger V_{jb} \frac{i\bar{v}_{ijkl}U_{l\alpha}U^T_{\beta k}}{2} - V_{ai}^\dagger U_{jb} \frac{i\bar{v}_{ijkl}V_{l\alpha}V^T_{\beta k}}{2} + V_{ai}^\dagger V_{jb} i\bar{v}_{ikjl}V_{l\alpha}U^T_{\beta k}  \right)\left(1-f_\alpha-f_\beta\right)                                                                \\
+-(E_a+E_b)(1-f_a-f_b) - i(1-f_a-f_b)\left(U_{ai}^\dagger V^*_{jb} i\bar{v}_{ikjl}U_{l\alpha}V^T_{\beta k} + U_{ai}^\dagger U^*_{jb} \frac{i\bar{v}_{ijkl}U_{l\alpha}U^T_{\beta k}}{2} - V_{ai}^\dagger V^*_{jb} \frac{i\bar{v}_{ijkl}V_{l\alpha}V^T_{\beta k}}{2} + V_{ai}^\dagger U^*_{jb} i\bar{v}_{ikjl}V_{l\alpha}U^T_{\beta k}  \right)\left(1-f_\alpha-f_\beta\right)                                       \\
+i(1-f_a-f_b)\left(V_{ai}^T U_{jb} i\bar{v}_{ikjl}U_{l\alpha}V^T_{\beta k} + V_{ai}^T V_{jb} \frac{i\bar{v}_{ijkl}U_{l\alpha}U^T_{\beta k}}{2} - U_{ai}^T U_{jb} \frac{i\bar{v}_{ijkl}V_{l\alpha}V^T_{\beta k}}{2} + U_{ai}^T V_{jb} i\bar{v}_{ikjl}V_{l\alpha}U^T_{\beta k}  \right)\left(1-f_\alpha-f_\beta\right)                                                                \\
+-i(f_a-f_b)\left(V_{ai}^T V^*_{jb} i\bar{v}_{ikjl}U_{l\alpha}V^T_{\beta k} + V_{ai}^T U^*_{jb} \frac{i\bar{v}_{ijkl}U_{l\alpha}U^T_{\beta k}}{2} - U_{ai}^T V^*_{jb} \frac{i\bar{v}_{ijkl}V_{l\alpha}V^T_{\beta k}}{2} + U_{ai}^T U^*_{jb} i\bar{v}_{ikjl}V_{l\alpha}U^T_{\beta k}  \right)\left(1-f_\alpha-f_\beta\right)
+\end{array}\right)
+\end{equation}
+\begin{equation}
+\mathcal{\bar{M}}_{:3} = \frac{1}{4}\left(\begin{array}{c}
+i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} -i\bar{v}_{ikjl}V^*_{l\alpha}U^\dagger_{\beta k} + U_{ai}^\dagger V_{jb} \frac{-i\bar{v}_{ijkl}V^*_{l\alpha}V^\dagger_{\beta k}}{2} - V_{ai}^\dagger U_{jb} \frac{-i\bar{v}_{ijkl}U^*_{l\alpha}U^\dagger_{\beta k}}{2} + V_{ai}^\dagger V_{jb} -i\bar{v}_{ikjl}U^*_{l\alpha}V^\dagger_{\beta k}  \right)\left(1-f_\alpha-f_\beta\right)                                                                  \\
+-i(1-f_a-f_b)\left(U_{ai}^\dagger V^*_{jb} -i\bar{v}_{ikjl}V^*_{l\alpha}U^\dagger_{\beta k} + U_{ai}^\dagger U^*_{jb} \frac{-i\bar{v}_{ijkl}V^*_{l\alpha}V^\dagger_{\beta k}}{2} - V_{ai}^\dagger V^*_{jb} \frac{-i\bar{v}_{ijkl}U^*_{l\alpha}U^\dagger_{\beta k}}{2} + V_{ai}^\dagger U^*_{jb} -i\bar{v}_{ikjl}U^*_{l\alpha}V^\dagger_{\beta k}  \right)\left(1-f_\alpha-f_\beta\right)                                         \\
+(E_a+E_b)(1-f_a-f_b) + i(1-f_a-f_b)\left(V_{ai}^T U_{jb} -i\bar{v}_{ikjl}V^*_{l\alpha}U^\dagger_{\beta k} + V_{ai}^T V_{jb} \frac{-i\bar{v}_{ijkl}V^*_{l\alpha}V^\dagger_{\beta k}}{2} - U_{ai}^T U_{jb} \frac{-i\bar{v}_{ijkl}U^*_{l\alpha}U^\dagger_{\beta k}}{2} + U_{ai}^T V_{jb} -i\bar{v}_{ikjl}U^*_{l\alpha}V^\dagger_{\beta k}  \right)\left(1-f_\alpha-f_\beta\right)                                         \\
+-i(f_a-f_b)\left(V_{ai}^T V^*_{jb} -i\bar{v}_{ikjl}V^*_{l\alpha}U^\dagger_{\beta k} + V_{ai}^T U^*_{jb} \frac{-i\bar{v}_{ijkl}V^*_{l\alpha}V^\dagger_{\beta k}}{2} - U_{ai}^T V^*_{jb} \frac{-i\bar{v}_{ijkl}U^*_{l\alpha}U^\dagger_{\beta k}}{2} + U_{ai}^T U^*_{jb} -i\bar{v}_{ikjl}U^*_{l\alpha}V^\dagger_{\beta k}  \right)\left(1-f_\alpha-f_\beta\right)
+\end{array}\right)
+\end{equation}
+\begin{equation}
+\mathcal{\bar{M}}_{:4} = \frac{1}{4}\left(\begin{array}{c}
+i(f_a-f_b)\left(U_{ai}^\dagger U_{jb} -i\bar{v}_{ikjl}V^*_{l\alpha}V^T_{\beta k} + U_{ai}^\dagger V_{jb} \frac{-i\bar{v}_{ijkl}V^*_{l\alpha}U^T_{\beta k}}{2} + V_{ai}^\dagger U_{jb} \frac{i\bar{v}_{ijkl}V_{l\alpha}U^\dagger_{\beta k}}{2} + V_{ai}^\dagger V_{jb} i\bar{v}_{ikjl}V_{l\alpha}V^\dagger_{\beta k}  \right)(f_\beta-f_\alpha)                                                                               \\
+-i(1-f_a-f_b)\left(U_{ai}^\dagger V^*_{jb} -i\bar{v}_{ikjl}V^*_{l\alpha}V^T_{\beta k} + U_{ai}^\dagger U^*_{jb} \frac{-i\bar{v}_{ijkl}V^*_{l\alpha}U^T_{\beta k}}{2} + V_{ai}^\dagger V^*_{jb} \frac{i\bar{v}_{ijkl}V_{l\alpha}U^\dagger_{\beta k}}{2} + V_{ai}^\dagger U^*_{jb} i\bar{v}_{ikjl}V_{l\alpha}V^\dagger_{\beta k}  \right)(f_\beta-f_\alpha)                                                      \\
+i(1-f_a-f_b)\left(V_{ai}^T U_{jb} -i\bar{v}_{ikjl}V^*_{l\alpha}V^T_{\beta k} + V_{ai}^T V_{jb} \frac{-i\bar{v}_{ijkl}V^*_{l\alpha}U^T_{\beta k}}{2} + U_{ai}^T U_{jb} \frac{i\bar{v}_{ijkl}V_{l\alpha}U^\dagger_{\beta k}}{2} + U_{ai}^T V_{jb} i\bar{v}_{ikjl}V_{l\alpha}V^\dagger_{\beta k}  \right)(f_\beta-f_\alpha)\\
+-(E_b-E_a)(f_a-f_b) - i(f_a-f_b)\left(V_{ai}^T V^*_{jb} -i\bar{v}_{ikjl}V^*_{l\alpha}V^T_{\beta k} + V_{ai}^T U^*_{jb} \frac{-i\bar{v}_{ijkl}V^*_{l\alpha}U^T_{\beta k}}{2} + U_{ai}^T V^*_{jb} \frac{i\bar{v}_{ijkl}V_{l\alpha}U^\dagger_{\beta k}}{2} + U_{ai}^T U^*_{jb} i\bar{v}_{ikjl}V_{l\alpha}V^\dagger_{\beta k}  \right)(f_\beta-f_\alpha)
+\end{array}\right)
+\end{equation}
+\end{sidewaystable}
+
+\end{document}
