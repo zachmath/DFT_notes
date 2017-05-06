@@ -224,8 +224,8 @@ It can be shown that
 \begin{align}\label{eqn:H0R2}
 \begin{aligned}
 \mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = \frac{1}{2}
-&\mathrm{Tr} \left([\chi^{11},E][\chi^{11},f] - \left\{\chi^{12},E\right\}(\chi^{21}-\{\chi^{21},f\})\right. \\
-&\left.+ \left\{\chi^{21},E\right\}(\chi^{12}-\{\chi^{12},f\}) - [\chi^{22},E][\chi^{22},f]\right)
+&\mathrm{Tr} \left([\chi^{11},E][\chi^{11},f] + \left\{\chi^{12},E\right\}(\chi^{21}-\{\chi^{21},f\})\right. \\
+&\left.+ \left\{\chi^{21},E\right\}(\chi^{12}-\{\chi^{12},f\}) + [\chi^{22},E][\chi^{22},f]\right)
 \end{aligned}
 \end{align}
 
@@ -241,16 +241,16 @@ A_{\mu\nu}-\left\{A,D\right\}_{\mu\nu} &= (1-D_\mu-D_\nu)A_{\mu\nu}
 
 \begin{align*}
 \frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = \frac{1}{4}
-& \left[(E_b-E_a)(f_a-f_b)\chi^{11}_{ab}\chi^{11}_{ba} - (E_a+E_b)(1-f_a-f_b)\chi^{12}_{ab}\chi^{21}_{ba}\right. \\
-&\left.+ (E_a+E_b)(1-f_a-f_b)\chi^{21}_{ab}\chi^{12}_{ba} - (E_b-E_a)(f_a-f_b)\chi^{22}_{ab}\chi^{22}_{ba}\right]
+& \left[(E_b-E_a)(f_a-f_b)\chi^{11}_{ab}\chi^{11}_{ba} + (E_a+E_b)(1-f_a-f_b)\chi^{12}_{ab}\chi^{21}_{ba}\right. \\
+&\left.+ (E_a+E_b)(1-f_a-f_b)\chi^{21}_{ab}\chi^{12}_{ba} + (E_b-E_a)(f_a-f_b)\chi^{22}_{ab}\chi^{22}_{ba}\right]
 \end{align*}
 
 \noindent If you wanted to get \textit{really} crazy (and we'll see in a bit why this might actually be okay), you could even throw in some extra delta functions to get this:
 
 \begin{align*}
 \frac{1}{2}\mathrm{Tr}\left(\mathcal{H}_0\mathcal{R}_2\right) = \frac{1}{4}
-& \left[(E_b-E_a)(f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{11}_{\alpha\beta}\chi^{11}_{ba} - (E_a+E_b)(1-f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{12}_{\alpha\beta}\chi^{21}_{ba}\right. \\
-&\left.+ (E_a+E_b)(1-f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{21}_{\alpha\beta}\chi^{12}_{ba} - (E_b-E_a)(f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{22}_{\alpha\beta}\chi^{22}_{ba}\right]
+& \left[(E_b-E_a)(f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{11}_{\alpha\beta}\chi^{11}_{ba} + (E_a+E_b)(1-f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{12}_{\alpha\beta}\chi^{21}_{ba}\right. \\
+&\left.+ (E_a+E_b)(1-f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{21}_{\alpha\beta}\chi^{12}_{ba} + (E_b-E_a)(f_a-f_b)\delta_{a\alpha}\delta_{b\beta}\chi^{22}_{\alpha\beta}\chi^{22}_{ba}\right]
 \end{align*}
 
 \noindent Note that this now has the general form
@@ -483,7 +483,7 @@ $\mathcal{\bar{M}}$ is given by column in table \ref{eqn:full_ATDHFB}, where it 
 % Row 1
 -(f_a-f_b)\left[ \bar{v}_{ikjl}\left(U_{ai}^\dagger U_{jb} U_{l\alpha}V^T_{\beta k} + V_{ai}^\dagger V_{jb} V_{l\alpha}U^T_{\beta k}\right) + \frac{\bar{v}_{ijkl}}{2}\left(U_{ai}^\dagger V_{jb} U_{l\alpha}U^T_{\beta k} - V_{ai}^\dagger U_{jb} V_{l\alpha}V^T_{\beta k}\right) \right]\left(1-f_\alpha-f_\beta\right)                                         \\
 % Row 2
--(E_a+E_b)(1-f_a-f_b)\delta_{a\alpha}\delta_{b\beta} + (1-f_a-f_b)\left[ \bar{v}_{ikjl}\left(U_{ai}^\dagger V^*_{jb} U_{l\alpha}V^T_{\beta k} + V_{ai}^\dagger U^*_{jb} V_{l\alpha}U^T_{\beta k} \right) + \frac{\bar{v}_{ijkl}}{2}\left( U_{ai}^\dagger U^*_{jb} U_{l\alpha}U^T_{\beta k} - V_{ai}^\dagger V^*_{jb} V_{l\alpha}V^T_{\beta k}\right)  \right]\left(1-f_\alpha-f_\beta\right)                                         \\
+(E_a+E_b)(1-f_a-f_b)\delta_{a\alpha}\delta_{b\beta} + (1-f_a-f_b)\left[ \bar{v}_{ikjl}\left(U_{ai}^\dagger V^*_{jb} U_{l\alpha}V^T_{\beta k} + V_{ai}^\dagger U^*_{jb} V_{l\alpha}U^T_{\beta k} \right) + \frac{\bar{v}_{ijkl}}{2}\left( U_{ai}^\dagger U^*_{jb} U_{l\alpha}U^T_{\beta k} - V_{ai}^\dagger V^*_{jb} V_{l\alpha}V^T_{\beta k}\right)  \right]\left(1-f_\alpha-f_\beta\right)                                         \\
 % Row 3
 -(1-f_a-f_b)\left[ \bar{v}_{ikjl}\left(V_{ai}^T U_{jb} U_{l\alpha}V^T_{\beta k} + U_{ai}^T V_{jb} V_{l\alpha}U^T_{\beta k}\right) + \frac{\bar{v}_{ijkl}}{2}\left(V_{ai}^T V_{jb} U_{l\alpha}U^T_{\beta k} - U_{ai}^T U_{jb} V_{l\alpha}V^T_{\beta k} \right) \right]\left(1-f_\alpha-f_\beta\right)        \\
 % Row 4
@@ -511,7 +511,7 @@ $\mathcal{\bar{M}}$ is given by column in table \ref{eqn:full_ATDHFB}, where it 
 % Row 3
 (1-f_a-f_b)\left[\bar{v}_{ikjl}\left(V_{ai}^T U_{jb} V^*_{l\alpha}V^T_{\beta k} - U_{ai}^T V_{jb} V_{l\alpha}V^\dagger_{\beta k}\right) + \frac{\bar{v}_{ijkl}}{2}\left(V_{ai}^T V_{jb} V^*_{l\alpha}U^T_{\beta k} - U_{ai}^T U_{jb}V_{l\alpha}U^\dagger_{\beta k}\right)   \right](f_\beta-f_\alpha)\\
 % Row 4
--(E_b-E_a)(f_a-f_b)\delta_{a\alpha}\delta_{b\beta} - (f_a-f_b)\left[\bar{v}_{ikjl}\left(V_{ai}^T V^*_{jb} V^*_{l\alpha}V^T_{\beta k} - U_{ai}^T U^*_{jb} V_{l\alpha}V^\dagger_{\beta k}\right) + \frac{\bar{v}_{ijkl}}{2}\left( V_{ai}^T U^*_{jb} V^*_{l\alpha}U^T_{\beta k} - U_{ai}^T V^*_{jb} V_{l\alpha}U^\dagger_{\beta k}\right)   \right](f_\beta-f_\alpha)
+(E_b-E_a)(f_a-f_b)\delta_{a\alpha}\delta_{b\beta} - (f_a-f_b)\left[\bar{v}_{ikjl}\left(V_{ai}^T V^*_{jb} V^*_{l\alpha}V^T_{\beta k} - U_{ai}^T U^*_{jb} V_{l\alpha}V^\dagger_{\beta k}\right) + \frac{\bar{v}_{ijkl}}{2}\left( V_{ai}^T U^*_{jb} V^*_{l\alpha}U^T_{\beta k} - U_{ai}^T V^*_{jb} V_{l\alpha}U^\dagger_{\beta k}\right)   \right](f_\beta-f_\alpha)
 \end{array}\right)
 \end{equation*}
 \end{sidewaystable}
@@ -521,6 +521,7 @@ Now we have an expression for the energy in terms of an inertia tensor $\mathcal
 
 \noindent\textit{Sanity Check:} As in the case of the ATDHFB equations from section \ref{sect:chi-rdot}, in the $T=f=0$ case, the $^{11}$ and $^{22}$ terms vanish completely in the lines leading up to \ref{eqn:H0R2_inertia} and \ref{eqn:H1R1_inertia} and we are left with familiar [zero-temperature] ATDHFB expressions. In essence, the rank of the problem reduces from dealing with a 4x4 matrix to dealing with a 2x2 matrix.
 
+% Note: if you uncomment this, there might be a sign error on your $E_a+E_b$ terms (see the 5-5-17 correction on p.23 of your handwritten notes)
 %\begin{sidewaystable}
 %\begin{equation*}
 %E_{kin} = \left(
@@ -545,9 +546,9 @@ We already introduced the cranking approximation briefly in section \ref{sect:ch
 \begin{equation}\label{eqn:cranked_ATDHFB}
 \mathcal{\bar{M}} = \frac{1}{4}\left(\begin{array}{@{}c@{}c@{}c@{}c@{}}
 (E_b-E_a)(f_a-f_b) & 0                     & 0                     & 0 \\
-0                  & -(E_a+E_b)(1-f_a-f_b) & 0                     & 0 \\
+0                  & (E_a+E_b)(1-f_a-f_b) & 0                     & 0 \\
 0                  & 0                     & (E_a+E_b)(1-f_a-f_b)  & 0 \\
-0                  & 0                     & 0                     & -(E_b-E_a)(f_a-f_b)
+0                  & 0                     & 0                     & (E_b-E_a)(f_a-f_b)
 \end{array}\right)
 \end{equation}
 
@@ -583,8 +584,8 @@ E_{kin} \approx \frac{1}{2}\sum_{\mu\nu}\dot{q}_\mu\dot{q}_\nu\mathsf{M}_{\mu\nu
 \begin{tcolorbox}
 \begin{align}
 \begin{aligned}
-\mathsf{M}_{\mu\nu} =  \frac{\hbar^2}{2}&\left[\frac{1}{(E_a-E_b)(f_b-f_a)}\left(\frac{\partial\mathcal{R}^{11}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{11}_{(0),ba}}{\partial q_\nu}-\frac{\partial\mathcal{R}^{22}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{22}_{(0),ba}}{\partial q_\mu}\right)\right. \\
-&\left.\frac{1}{(E_a+E_b)(1-f_a-f_b)}\left(\frac{\partial\mathcal{R}^{21}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{12}_{(0),ba}}{\partial q_\nu}-\frac{\partial\mathcal{R}^{12}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{21}_{(0),ba}}{\partial q_\mu}\right)\right]
+\mathsf{M}_{\mu\nu} =  \frac{\hbar^2}{2}&\left[\frac{1}{(E_a-E_b)(f_b-f_a)}\left(\frac{\partial\mathcal{R}^{11}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{11}_{(0),ba}}{\partial q_\nu}+\frac{\partial\mathcal{R}^{22}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{22}_{(0),ba}}{\partial q_\mu}\right)\right.+ \\
+&\left.\frac{1}{(E_a+E_b)(1-f_a-f_b)}\left(\frac{\partial\mathcal{R}^{21}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{12}_{(0),ba}}{\partial q_\nu}+\frac{\partial\mathcal{R}^{12}_{(0),ab}}{\partial q_\mu}\frac{\partial\mathcal{R}^{21}_{(0),ba}}{\partial q_\mu}\right)\right]
 \end{aligned}
 \end{align}
 \end{tcolorbox}
