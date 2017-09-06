@@ -3,6 +3,39 @@
 \maketitle
 There are several different ways to include pairing correlations in nuclear structure calculations, many of which are based on the BCS theory of superconductors. In it, nucleon pairs can be described as quasiparticles in a nuclear superfluid. Here I will describe three different approaches for describing nuclear structure which account for pairing, each with varying degrees of generality.
 
+Just some terminology: \textbf{Pairing strength} refers to the coefficient of the \textit{effective} pairing interaction. A large pairing strength means pairs are more likely to form. \textbf{Pairing gap} refers to the energy it takes to break a pair and promote one particle to the next energy level. A large pairing gap keeps pairs together. Pairing strength and pairing gap are similar concepts and may be related in some cases; the difference is that one is a phenomenological construct used in effective theoretical descriptions whereas the other is a physically ``measurable'' quantity. \textbf{Pairing energy} refers to the extra binding energy associated with nucleonic pairs. It is (I believe) the energy contribution coming from the effective pairing interaction.
+
+I should also mention that in the literature, there are two types of pairing that get mentioned: static and dynamic pairing correlations. So far as I can tell, \textbf{static pairing} refers to pairing at the level of HF+BCS or HFB. It might, for example, take the form of a density-dependent zero-range interaction such as this:
+
+\begin{equation*}
+V(r) = V_0\left(1-\left(\frac{\rho(r)}{\rho_0}\right)^\alpha\right)
+\end{equation*}
+
+\noindent I believe this is what you would use to create the $\Delta$ in your HFB matrix, for instance. \textbf{Dynamic pairing} refers to correlations that go beyond this approximation, and they are what cause so-called pairing fluctuations or pairing vibrations (if pairing correlations are strong enough and you start moving away from magic nuclei, the parameters defining the pairing gap will fluctuate or vibrate around their ground state value in the same way the surface shape might vibrate around its ground state shape). Essentially you can break down the energy like this:
+
+\begin{equation*}
+E \rightarrow E_{HF} + E^{pair}_{static} + E^{pair}_{dyn} \equiv E_{HFB} + E^{pair}_{dyn}
+\end{equation*}
+
+I believe Lipkin Nogami is an example dynamic pairing recipe. In essence, you see pairs becoming more or less attached to their parent nucleus, and that in turn affects the dynamics. This is why Lipkin-Nogami keeps track of particle number: because the particle number of the nucleus is actually somewhat changing, as those pairs decide whether or not to stay attached (and I'm not sure whether I mean the pair would separate or if they would just be excited as a boson-like pair). By fixing the particle number as you do with Lipkin-Nogami, you essentially fix the gap strength, which determines how hard the nucleus has to work to keep that pair attached. Sometimes it'll be worth it, and sometimes it won't.
+
+For more information on static vs dynamic pairing correlations, some possible starting points are this passage from 50 Years of Nuclear Pairing (figures \ref{fig:static_dynamic_pairing1} and \ref{fig:static_dynamic_pairing2}), along with this paper: \cite{SHIMIZU1990c477}. To see how they play a role physically, see \cite{SHIMIZU198733} and \cite{MORETTO19721}.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{TeX_files/static_dynamic_pairing1}
+\caption{Part 1 of a helpful description of the difference between static and dynamic pairing.}
+\label{fig:static_dynamic_pairing1}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{TeX_files/static_dynamic_pairing2}
+\caption{Part 2 of a helpful description of the difference between static and dynamic pairing.}
+\label{fig:static_dynamic_pairing2}
+\end{figure}
+
+
 \section*{BCS Theory and HF+BCS (\cite{suhonen2007nucleons,Anguiano2013})}
 One way to include pairing correlations is to solve the Hartree-Fock equations and add BCS on top. This method is called HF+BCS and it does a fair job of describing nuclei near the valley of stability, but gets progressively worse the further from stability you get (see \cite{Anguiano2013}).
 
