@@ -9,3 +9,27 @@ In fact, it takes a couple hundred more lines of setup inside the loop before an
 The mean-field matrix diagonalization is completed by $\sim5985$; everything else inside the loop is just bonus physics calculations that take advantage of the newly-computed densities, with some error handling thrown in there as well. So don't be too intimidated by the massive size of the code base; the actual functionality - everything you need to know about the code - is only around 9000 lines (still a lot, but nothing compared to the 200,000 or so lines that make up the entirety of HFODD).
 
 Another thing to note is that there is by default a constraint on $Q_{20}$. There are, of course, plenty of preset values, but this one seems particularly obnoxious. I think there's a way around it but I don't remember off the top of my head what it was.
+
+In the table of energies, the so-called ``total energy'' (the very last term in the bottom right) is (so far as I can tell) given by equation I-9 (from the orignal HFODD paper; see also eq VI-96):
+\begin{align}
+E_{tot} &= E_{kinetic} + E_{Skyrme} + E_{Coulomb} + E_{pair} \\
+& + \left[ E_{LN} + E_{pot} + E_{Gog} + E_{Yuk} + E_{CM} + E_{rot} \right]
+\end{align}
+
+\section*{Notes on specific subroutines, variables, etc. that I once found useful to know}
+
+Subroutine \texttt{paipri} appears to be printing values it got from the replay file. It uses the variable \texttt{EFER2X} internally, but it is called with \texttt{EFER2N}.
+
+The record file is actually read in ~3447, after some info is printed (\texttt{INFPRI}).
+
+\texttt{ADJBAS} adjusts to find the optimal basis, given the requested value of $Q_{20}$.
+
+\texttt{QMULCM} updates Lagrange multipliers of multipole constraints.
+
+\texttt{QCNTRS} calculates energy contributions due to multipole contraints.
+
+\texttt{INTCON} Calculates multipole moment constraining fields. Called inside \texttt{INTEGH}, which is where matrix elements of the Skyrme mean field are calculated (see eqn 28 of \cite{Dobaczewski1997}). Returns \texttt{HPPCON/HPMCON} (or \texttt{HAUXPP, HAUXPM} as given in the subroutine call).
+
+\texttt{INTEGH} Calculates mean-filed Hamiltonian matrix elements. I believe, but am not positive, that this is eqn 26 in \cite{Dobaczewski1997}. Nothing complicated is really computed in this subroutine; rather, it makes calls to a bunch of subroutines, which individually calculate the different pieces of things found in eqns 27-30, 111, etc, and then just adds the results into a single matrix.
+
+\texttt{DENSHF} Calculates densities (see eqns 40-51 in \cite{Dobaczewski1997})

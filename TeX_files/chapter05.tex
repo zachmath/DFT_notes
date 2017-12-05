@@ -56,3 +56,34 @@ I was asked a question during my second committee meeting by Filomena that is wo
 \section{Describing Scission}
 
 (This is probably way out of place, but whatever...) Intuitively, you might think that the driving factor which determines fragment ID distributions would be shell structure of the fragments. And if I'm reading this right \cite[2nd paragraph + references]{Mcdonnell2014}, you'd be partly right: the \textit{real} driving factor is shell structure of the \textit{prefragments}, and an important factor in understanding this is that the prefragments are typically highly-deformed, which means that their shell structure is probably totally different than it would be for those same fragments in their ground state.
+
+\section{Multipole moments}
+Something I have said in the past is that the multipole moments of a system are essentially related to the spherical harmonics expansion. That's true-ish, but I should do this a little bit more carefully.
+
+Imagine you have a single particle, and origin, and a coordinate system. Furthermore, suppose for the sake of argument that the origin does not coincide with the location of the particle. Automatically, then, the system has some dipole moment. This moment is a geometrical attribute of the system. It contains information about the charge of the system and the way it is distributed. The sum of multipole moments gives the total potential.
+
+But in fact you might go further, for if the particle is not aligned with a coordinate axis, then you introduce higher-order multipole moments, as well. In general it will have a monopole contribution, a dipole contribution, a quadrupole contribution, etc. Griffiths E\&M p. 147-148 shows how this can be done systematically, as does Jackson p. 145. When you draw out a system involving an origin, a source point, and an observation point, and you describe the relation between them using some law of cosines stuff, and expand out in terms of $\frac{r'}{r}$, where $r'$ is the distance from origin to source point and $r$ the vector separating origin and observation points, then you end up getting Legendre polynomials. That is given for a single source point in Griffiths (3.94), and then you can sum over all source points as seen in Griffiths (3.95). Jackson uses an expansion in spherical harmonics $Y^m_l$ instead of Legendre polynomials $P_l$, which I supposed contains fundamentally the same information but going back and forth takes some work (see Jackson (4.2)). The multipole moment is defined explicitly and plainly in Jackson in terms of spherical harmonics. It is the part that contains strictly the information about the source, and which is independent of the observation point:
+
+\begin{align*}
+\Phi(\vec{x}) &= \frac{1}{4\pi\epsilon_0}\int\frac{\rho(\vec{x'})}{|\vec{x}-\vec{x'}|}d^3x' \\
+&= \frac{1}{\epsilon_0}\sum_{l,m}\frac{1}{2l+1}\left[\int Y_l^{*m}(\theta',\phi')r'^l\rho(\vec{x'})d^3x'\right]\frac{Y_l^m(\theta,\phi)}{r^{l+1}} \\
+&\equiv \frac{1}{\epsilon_0}\sum_{l,m}\frac{1}{2l+1}q_{lm}\frac{Y_l^m(\theta,\phi)}{r^{l+1}}
+\end{align*}
+
+\noindent I'm not quite sure what the ``charge'' is in the multipole decomposition of the nuclear shape, but maybe it's the number of nucleons? Or even just 1? I just base that on the fact that the total monopole moment for protons equals the number of protons (so if you compute the monopole moment for each particle individually, I don't know what they will be individually, but together they'll add up to the total number of protons). Actually, as I think about it, it's probably just the mean field density. That's the main thing we're using/looking for, after all. Duh.
+
+So the main thing you need to get out of this (regardless of how we got there; multipole moments are standard now) is that multipole moments are defined in the following way:
+
+\begin{equation*}
+q_{lm} = \int Y_l^{*m}(\theta',\phi')r'^l\rho(\vec{x'})d^3x'
+\end{equation*}
+
+As far as HFB is concerned, your multipole constraint appears with a Lagrange multiplier: $\hat{H} - \lambda\hat{N} - \lambda_i \hat{Q}_i$. The $\hat{Q}$ is the multipole operator. What is it operating on? The density. I don't know if that coefficient has any physical significance.
+
+On a related note, sometimes nuclear deformations are described in terms of the coordinates $(\beta_{20}, \gamma)$ instead of $(Q_{20},Q_{22})$. There's some kind of relation between $\beta_2$ and $Q_{20}$, and I'm not positive what it is but \cite{Giuliani2017} has an equation
+
+\begin{equation*}
+\beta_{20} = \frac{\sqrt{20\pi}}{5A}\frac{Q_{20}}{r^2}
+\end{equation*}
+
+\noindent where $r=1.2A^\frac{1}{3}$ fm. I don't know if that's generally true but I'ma hold onto it for a while and see if anything else comes up.

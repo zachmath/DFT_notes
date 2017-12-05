@@ -1,0 +1,42 @@
+\chapter{Bayesian Inference}
+
+A lot of my notes on statistical inference are in my UQ class notes from Fall 2017 with Mohsen Z, but I have some more fundamental questions that I'd like to understand and I think writing down insights as they come will ultimately prove helpful.
+
+\section{Bayes' Theorem}
+
+Let's say you have a model of some system, but you don't know the coefficients or parameters of the model. But you do have a bunch of data, and you'd like to use that data to go back and figure out what the model parameters probably are. For instance, in a coin toss, you might have a model like $H(f) = \alpha*f$, where $f$ is the number of flips and $H$ is the number of heads. You've done the experiment a hundred million times and you want to use your data to come up with some estimate for the coefficient $\alpha$ (and perhaps even an uncertainty). You might also have some inkling of what that coefficient should be - for sure you know that it will be somewhere between 0 and 1, but maybe you have reason to believe that it's even somewhere in the interval [0.37, 0.54], or that coin-flipping coefficients are manufactured around a normal distribution centered about 0.53.
+
+The essence of Bayes' Theorem says that if you fold together everything that you know (your data) with what you suspect (your ``prior''), then you can update your suspicion (your ``posterior,'' which can in turn become a prior in your next round of estimation) to give you something probably better. Depending on the ``forcefulness'' of your prior, or the amount of data you've collected, you might see that the data completely overwhelms the prior, or vice versa.
+
+The prior could be anything from a flat line (if you have no idea what to expect) to a delta function (though I wouldn't recommend using that since it makes your posterior also a delta function unless you know for a fact what to expect, but then why are you even doing this?).
+
+The likelihood is where you work your data in. An example likelihood function might involve an exponential of a chi-squared function, for example ($P(D|H) \sim exp(-\frac{\chi^2}{2})$). This would give some sort of distribution that is peaked at the ``best fit'' set of parameters. In general, a likelihood tells you ``How likely was this outcome, given these parameters?'' whereas the posterior tells you ``How likely are these parameters, given the outcome?''
+
+[These StackExchange questions has some helpful discussion: \\ https://stats.stackexchange.com/questions/58564/help-me-understand-bayesian-prior-and-posterior-distributions \\
+https://stats.stackexchange.com/questions/2641/what-is-the-difference-between-likelihood-and-probability]
+
+\section{Markov Chain Monte Carlo}
+
+Let's say we have a set of data $D$ and a model hypothesis with parameters $H$. Then Bayes' Theorem in this case might look like:
+
+\begin{equation}
+P(H|D) = \frac{P(D)P(D|H)}{P(H)}
+\end{equation}
+
+Just for the sake of argument, our prior and likelihood might take the following forms:
+
+\begin{align}
+P(D) &\sim exp[\frac{1}{2}(\vec{x}-\vec{x}_0)^TC_p^{-1}(\vec{x}-\vec{x}_0)] \nonumber\\
+P(D|H) &\sim exp[\frac{\chi^2}{2}] \nonumber\\
+\chi^2 &= \sum_i\left[\frac{\sigma^{th}(\vec{x})-\sigma^{exp}}{\Delta\sigma}\right]^2 \nonumber
+\end{align}
+
+\noindent Maybe we want to estimate the sample distribution for the parameter $x_1$. We could do that essentially by integrating the posterior over all other parameters:
+
+\begin{equation}
+P(H_1|D) = \int P(D)P(D|H)dx_2dx_3\dots dx_n
+\end{equation}
+
+In principle, this makes sense. You get a nice-looking one-dimensional distribution of values of $x_1$ as sort of a histogram. In practice, though, that integral is probably really hard to solve. So instead you can turn to a method called Markov Chain Monte Carlo. In there, you pick a starting point in your sample space, and then you just do sort of a random walk (described by your Markov Chain). You take a bunch of steps, and you keep the ones that satisfy a set of conditions \footnote{You'll probably evaluate the prior and likelihoods at the old step and the new step, compute their ratio, and only keep the point if the ratio $\frac{\mathnormal{new point}}{\mathnormal{old point}}>1$}. From these saved/logged/archived steps, you can put together essentially a histogram that represents the posterior distribution for that parameter.
+
+``But Zachary!'' you might ask. ``If you're only keeping points that give an improved ratio, then won't you converge quickly to the 'true' value, and not have much to show in the tails?'' And the answer is ``not necessarily.'' It might be that your prior is way out in the tails, for instance, and so your random walk might heavily favor those values at first until you have enough data to override. Or perhaps you're in a weird saddle/local minimum of your multidimensional space where improving one parameter requires you to reduce the quality of another. Or perhaps you have a complicated, ill-posed, non-linear model where converging to the ``true'' parameter (which doesn't really even exist in Bayesian statistics, but let's pretend) might not immediately converge to the true value ($\lim_{x\rightarrow x_{true}}\sigma^{th}(x) \neq \sigma^{exp}$ over some range of $x$).

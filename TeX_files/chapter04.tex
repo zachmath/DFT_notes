@@ -592,6 +592,10 @@ E_{kin} \approx \frac{1}{2}\sum_{\mu\nu}\dot{q}_\mu\dot{q}_\nu\mathsf{M}_{\mu\nu
 
 \noindent In the zero temperature case, the first chunk (involving $\mathcal{R}^{11}$ and $\mathcal{R}^{22}$) should be replaced with zero.
 
+\subsubsection{Perturbative cranking}
+
+Let's say you want to know the inertia at a single point on a PES, for instance, but you don't want to compute its neighbors in order to do a finite-differences derivative. Well, lucky for you there exist perturbative expressions for computing the inertia tensor at a single point. I'm not going to go through and show them here because they've already been done elsewhere (Nicolas' notes, for example), but I just wanted to mention it, along with a warning that they aren't always very good - especially, apparently, for triaxial shapes (see \cite{Sadhukhan2013}).
+
 \section{Numerical implementation}
 
 We run into some kind of issue when we try to implement \ref{crankedFiniteTempInertia} on a computer using small, non-zero temperatures (or, more generally, when $f_b-f_a$ is small). I believe the primary source of the discrepancy is numerical, for the following reasoning:

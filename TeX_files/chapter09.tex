@@ -1,0 +1,90 @@
+\chapter{Some notes on HFODD}
+
+\section{Introduction}
+A recent goal in nuclear physics has been to develop models with quantified uncertainties. One of these models - DFT - is useful all across the nuclear landscape. A recent collaboration sought to develop a UNiversal Energy Density Functional - hence the name of the collaboration, UNEDF. This family of three energy density functionals was designed to be applied across the entire nuclear chart, and each member of the set had a particular focus in mind: UNEDF0 was a proof of concept, UNEDF1 was optimized for large nuclear deformations, and UNEDF2 is designed to effectively capture the physics of shell structure. Furthermore, these functionals were designed with UQ in mind; each functional has an evaluated covariance matrix, and sensitivity analyses were performed for each of the parameters.
+
+\section{Compiling a list of uncertainties}
+So far I'm just brainstorming by outlining essentially every possible source of error or uncertainty I can think of in the physical model and its numerical implementation. At each step I'll discuss both some short- and long-term suggestions for ways to improve the outcome.
+
+\subsection{Nuclear Force}
+\begin{itemize}
+\item We don't really \textit{know} the nuclear force, per se...
+\item Skyrme, Gogny, etc
+\item EDF parameterization
+\item EDF fitting strategy
+\item Coulomb\dots
+\item The mean-field approximation, and consequently, the pairing interaction - or in other words, correlations that go beyond just the mean-field
+\item \dots
+\end{itemize}
+
+\subsection{DFT Solver}
+I should mention here that there is some brief discussion at the beginning of the very first HFODD paper about different numerical techniques that can be (and perhaps \textit{have been}) used to solve the HF(B) equations, such as finite-difference or conjugate gradient methods (see also subsection 7.3.3 of Ring and Schuck).
+
+\begin{itemize}
+\item Basis size - number of states, shells
+\item Basis type
+\item Integration mesh
+\item Determining convergence - That's hard to quantify exactly; it may be that we converge to a local, but not global minimum.
+\item Calculation of $V_{eff}$ (subtracting off zero-point energy?)
+\item The whole thing about using a ground state-based method to calculate highly-deformed nuclei
+\item \dots
+\end{itemize}
+
+\subsection{Inertia}
+\begin{itemize}
+\item Recipe for calculating (perturbative vs. nonperturbative, ATDHF vs GCM)
+\item Adiabatic approximation - ``slow'' collective motion
+\item Finite difference spacing
+\item Cutoff parameter (for finite temperature)
+\end{itemize}
+
+Here there's a divergence which determines what comes next
+
+\subsection{Half-life, Pathway to Fragments}
+\begin{itemize}
+\item Validity of WKB approximation
+\item Semi-classical SF half-life approximation
+\item Parameters determining frequency of tunneling attempts
+\item Interpolation of potential energy surface
+\item Choice of collective coordinates
+\item Choice of $E_0$ 
+\item Identification of scission line
+\item Identification of least-action path inside the barrier (Dynamic programming method vs. Ritz method [vs. static least-energy path])
+\item Effectiveness of Langevin description of dynamics outside the barrier
+\item \dots
+\end{itemize}
+
+\section{Review of the DFT error analysis survey article \cite{Schunck2015}}
+
+There are two schools of thought when it comes to DFT, apparently. One is ... I'm not totally sure what the distinction is, actually. The first has something to do with building a self-consistent mean-field (and my impression is that's done \textit{from scratch}, in some sense.) The other (which is what I'm familiar with) starts with a rather phenomenological potential (perhaps a Skyrme interaction), as opposed to one built from the ground up. Then you somehow come up with a set of parameters to tweak that Skyrme interaction. That's where the UNEDF project takes off.
+
+Essentially what this paper tries to do in the end, though, is to discuss the three types of uncertainties that can affect your DFT calculation results. There are numerical errors, which are pretty easy to understand and likewise to quantify. For example, in an iterative scheme, you can increase the number of iterations and see how the convergence of your solution is affected. Or if your calculation depends on a basis expansion, you can try running the calculation with different basis sizes and seeing what happens. As a general rule of thumb, if you want to quantify numerical errors, it's probably just a matter of increasing the number of iterations/increasing the size of the basis/using a finer mesh. Nothing too mysterious here.
+
+Harder to quantify is the effect of your theoretical model itself. Intuitively we believe that a DFT calculation should give better results than a liquid drop model calculation, or ab initio potentials will be superior to phenomenology, but it doesn't always work out that way and oftentimes (if you're extrapolating your model) it's impossible to quantify. We assume that our description of the nucleus will be incomplete whenever we use a Skyrme-based potential, but we don't really know \textit{how} incomplete. And it's not obvious how to go about determining that, short of just comparing against experiment (but again, you really have to be able to tease out your numerical error and your fitting bias). That's why it would be nice to have either potentials, or at least coupling constants derived somehow from theory, and not just fit to data. Because if you can fit your coupling constants from theory, then at least you know what approximations it took to get from ``exact'' to ``approximate.'' So a good question to answer would be ``How could we get from the basic NN-interaction to Skyrme?'' Is such a thing even possible? Skyrme is phenomenological, but maybe it could emerge from an analytic NN interaction somehow? If only we had an analytic form for a NN interaction (or even approximation that was analytic)...
+
+But wait - isn't that what Skyrme \textit{is}? Oh gosh, we're hosed...
+
+Anyway, the other thing to quantify here is the uncertainty in your model parameters. These are separate from the shortcomings of the model itself - you accept that your model is off by some amount, because of what you might consider a systematic error in your model (a missing bit of physics, for instance). Already you can see how hard it is to tease apart your model uncertainty and your model parameter uncertainty, because what we're about to ask you to do is to find the exact parameters to an inexact model. What would that even mean? So maybe you settle for a ``best'' set of parameters. Okay, fine. Still tough to do ``exactly.'' For one thing, your fit will depend on the numerical implementation of the model (all that stuff about basis size, number of iterations, grid spacing, etc again applies, plus maybe some assumptions made in the solver that restrict it to a certain subset of the full model). Then it also depends on the optimization scheme you use (least squares fitting or something else). And finally, it depends on the experimental data you feed into it. In fact, there have been a few studies aimed at understanding the impact of different types of data on your final results (a few are mentioned towards the end of section 4.1, and there is also the paper done my Jordan, Nicolas, Witek, and others \cite{McDonnell2015}).
+
+These points are supplemented with some examples from the UNEDF project, showing how difficult it can be to tease apart the different sources of uncertainty but trying anyway. They talk a bit about the Bayesian problem they solved to do the fitting, and then about some of the assumptions they made in order to compute the covariance matrix and such, and tried to argue whether those assumptions were reasonable or not. To really understand what was done beyond these illustrative introductions, though, I imagine I'll need to look back at the original papers. So next stop: UNEDF0!
+
+\section{Review of the UNEDF0 paper \cite{Kortelainen2008}}
+
+Something cool about this, right off the bat after reading the abstract, is that they gained ``new physics insights...by the advanced covariance analysis.''
+
+There's a nice brief review of some of the other parameter-fitting schemes that have been attempted. Those are nice because they help to understand better the nature of parameter-fitting uncertainties.
+
+In practice, the way things worked was to take their DFT solver and compile or run it inside a wrapper code (\texttt{POUNDERS}, I believe) that took care of the statistics part, and called on the DFT solver whenever it needed something.
+
+The first thing they did was they tried to find, for as many parameters as possible, a sensible range of values in which to do a parameter search. The EDF terms are not directly-related to any observable quantities; however, the equation of state for infinite nuclear matter can be recast both in terms of observable quantities as well as Skyrme functional densities and coupling constants, and from there we can draw an approximate relation between the two. Then, since we have a rough idea of what the equation of state physical quantities of interest/scale are, we have a good starting place for our parameter search.
+
+Then a set of experimental data was chosen to represent the chart of nuclides as a whole. This set has been published as a standard set of data for model calibrations, to reduce the uncertainty related with choice of experimental data.
+
+\section{Review of ``Error Estimates of Theoretical Models: a Guide'' \cite{Dobaczewski2014}}
+
+
+\section{Miscellaneous}
+
+This paper (https://e-reports-ext.llnl.gov/pdf/790483.pdf) has a nice table (Table 2) which shows the impact that your input starting points have on your final solution, even using the same algorithm and the same data points. That's very interesting, actually, because in most cases, the difference between starting and ending points have the same sign, and the starting and ending points almost have the same rough magnitudes between functionals.
+
+This paper (J. Phys. G: Nucl. Part. Phys. 42 (2015) 034031) does more-or-less the same thing.
