@@ -8,7 +8,7 @@ In fact, it takes a couple hundred more lines of setup inside the loop before an
 
 The mean-field matrix diagonalization is completed by $\sim5985$; everything else inside the loop is just bonus physics calculations that take advantage of the newly-computed densities, with some error handling thrown in there as well. So don't be too intimidated by the massive size of the code base; the actual functionality - everything you need to know about the code - is only around 9000 lines (still a lot, but nothing compared to the 200,000 or so lines that make up the entirety of HFODD).
 
-Another thing to note is that there is by default a constraint on $Q_{20}$. There are, of course, plenty of preset values, but this one seems particularly obnoxious. I think there's a way around it but I don't remember off the top of my head what it was.
+Another thing to note is that there is by default a constraint on $Q_{20}$. There are, of course, plenty of preset values, but this one seems particularly obnoxious. I think there's a way around it but I don't remember off the top of my head what it was. \rightarrow I think you can set the stiffness parameter to zero.
 
 In the table of energies, the so-called ``total energy'' (the very last term in the bottom right) is (so far as I can tell) given by equation I-9 (from the orignal HFODD paper; see also eq VI-96):
 \begin{align}
