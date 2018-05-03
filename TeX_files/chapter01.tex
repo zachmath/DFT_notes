@@ -145,32 +145,6 @@ h-\lambda & \Delta \\
 
 The case of rotating nuclei is interesting because experimental moments of inertia of deformed nuclei are found to be 2-3 times larger than what is calculated when pairing is ignored. Suhonen interprets this to mean that actual rotations involve the superfluid valence pairs rotating around an inert core. You can treat this by adding another constraint to $\hat{H} - \lambda\hat{N} - \omega J_x$. This is the idea behind what is called the cranking model, which describes systems in a rotating frame. It violates time-reversal just like how you've already eliminated particle number conservation. And you can add other constraints $\hat{H} - \lambda\hat{N} - \lambda_i \hat{Q}_i$ for any number of other things, like shape deformations. We use these in fission a lot.
 
-\section*{Lipkin-Nogami}
-The Lipkin-Nogami method of restoring particle number symmetry to the nucleus involves splitting the energy density into two terms:
-\begin{equation*}
-\mathcal{E}_{TOT} = \mathcal{E}_{HFB} + \mathcal{E}_{LN}
-\end{equation*}
-
-\noindent where $\mathcal{E}$ is computed as
-
-\begin{equation*}
-\mathcal{E}_{LN} = -\lambda_2\left(\left\langle N^2\right\rangle -N^2\right) = -2\lambda_2 \mathrm{Tr}\rho\left(1-\rho\right)
-\end{equation*}
-
-$\lambda_2$ is evaluated on every iteration using the updated densities form the previous iteration, starting from some initial value you can set in the input. It is also possible in HFODD to fix the value of lambda and not update it for each new iteration, if you're into that kind of thing. It is given approximately via the seniority-pairing interaction by
-
-\begin{equation*}
-\lambda_2 = \frac{G}{4}\frac{\mathrm{Tr}(1-\rho)\kappa \mathrm{Tr}\rho\kappa-2\mathrm{Tr}(1-\rho)^2\rho^2}{\left[\mathrm{Tr}\rho(1-\rho)\right]^2-2\mathrm{Tr}\rho^2(1-\rho)^2}
-\end{equation*}
-
-\noindent where
-
-\begin{equation*}
-G = G_{eff} = -\frac{\bar{\Delta}^2}{E_{pair}}, \qquad E_{pair} = -\frac{1}{2}\mathrm{Tr}\Delta\kappa, \qquad \bar{\Delta} = \frac{\mathrm{Tr}\Delta\rho}{\mathrm{Tr}\rho}
-\end{equation*}
-
-The UNEDF functionals included pairing strengths for both protons and neutrons as part of the Skyrme parameter set when they were optimizing, so the pairing strength is actually given as a parameter instead of computed from the densities in (for example) HFODD $\leftarrow$ Double-check this! But I think that's how it'll work? I'm getting lost in the source trying to find out... (4-19-2017) But definitely you shouldn't use Lipkin-Nogami with the EDF UNEDF1-HFB. That was explicitly computed \textit{without} Lipkin-Nogami. You could set the lambdas all you want but they won't do a darn thing, unless you turn on Lipkin-Nogami but that'd be dumb because then you'd get the wrong answer.
-
 \section*{Just a note...}
 ...and I'm not sure where exactly to put this, but here goes: I like the idea of recasting nuclear structure, and especially applications with heavy nuclei such as fission, in terms of a DFT framework, because in principle a DFT framework is (or can be) exact as a way of taking into account all the quantum properties of the underlying nuclear degrees of freedom. And if you're clever about it, you can use ab initio approaches to inform or develop new and useful EDFs. But I don't know what would be the best way to do that. If you just fit a Skyrme funcitonal to some quantities calculated by an ab initio method, you really aren't doing anything better than just fitting it to experimental quantities - in fact, the experimental quantities should in principle be better! So there's a non-trivial issue to solve. It seems like something that should be doable - use an ab initio method to derive a new type of EDF with perhaps a new and better parameterization, but right now that bridge feels like a missing link. There might be some hints, though, in the references found in section 2.3 of \cite{Schunck2015error_analysis}
 

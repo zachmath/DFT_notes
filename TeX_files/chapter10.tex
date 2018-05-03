@@ -1,0 +1,42 @@
+\chapter{Beyond Mean-Field Corrections}
+
+\maketitle
+
+Beyond mean-field corrections are used to include correlations which are discarded or distorted through the HFB/SCMF formalism. Some of these may deal with configuration mixing and collective motion, and these are treated using the Generator Coordinate Method. Other corrections are used to impose symmetries which are found in nature but which are violated in the mean-field calculation. I am going to explain these latter beyond mean-field correction in the context of Lipkin-Nogami, which is used to compensate for the loss of particle-number conservation due to the Bogoliubov transformation. There are, as I will mention later, other such corrections one can make, such as a rotational correction to restore good angular momentum, for instance. For more, one can read p.15 of Nicolas Schunck's and Luis Robledo's review article on fission \cite{Schunck2016review}, or especially section III-B of Michael Bender, et al's review article on self-consistent mean-field models \cite{Bender2003}.
+
+\section*{Lipkin-Nogami}
+The Lipkin-Nogami method of restoring particle number symmetry to the nucleus involves splitting the energy density into two terms:
+\begin{equation*}
+\mathcal{E}_{TOT} = \mathcal{E}_{HFB} + \mathcal{E}_{LN}
+\end{equation*}
+
+\noindent where $\mathcal{E}$ is computed as
+
+\begin{equation*}
+\mathcal{E}_{LN} = -\lambda_2\left(\left\langle N^2\right\rangle -N^2\right) = -2\lambda_2 \mathrm{Tr}\rho\left(1-\rho\right)
+\end{equation*}
+
+Lipkin-Nogami is an example of a beyond mean-field correction. Beyond mean field corrections are used to restore symmetries which are otherwise broken in the HFB equations, such as particle number conservation, a good angular momentum number (rotational invariance correction), or parity. Once the HFB solution is obtained, the conserved quantity is restored (in principle) by projecting your solution back onto the space of solutions with good quantum numbers. In principle, this projection should be done before variation (VAP), so that the wavefunctions from which the variational principle draws are only those which have the correct symmetries. However, VAP methods are quite challenging. You can approximate the effect by swapping the order (PAV). Here you take whatever solution successfully minimizes the HFB equations and then project \textit{that} onto the space of ``good'' wavefunctions. It's easier sometimes than VAP and may get you close, but of course it is not guaranteed that you'll get the correct answer.
+
+Sometimes even pure PAV is too hard, and you might want a simpler, more ``phenomenological'' way of guessing the effect of VAP. You do your mean-field HFB calculation, get some answer $|\Psi\rangle$, and then use some formula to estimate what the effect of VAP \textit{would have} been on your variational energy, had you done it that way. This is what Lipkin-Nogami is for particle number restoration. You solve the HFB equations at the mean field level, and instead of properly projecting your states onto states with good particle number symmetry, you calculate a correction term to your energy to estimate the effect that proper projection would have had. You can calculate the particle number variance $\langle\Delta \hat{N}^2\rangle$ just from your densities, and there is a recipe for calculating $\lambda_2$ from your density as well (see eqn 92 of Bender, et al, Rev Mod Phys 75 (2003), or see how it is implemented in HFODD below). In this case, since you are not actually using Lipkin-Nogami to do particle number restoration (even approximately), then the Lipkin correction term to the energy is not physical. The number you want, and which you actually have available, is the original mean-field solution \textit{without} any beyond mean-field corrections (or, I mean, you can add other ones, but just know that the ``default'' energy HFODD is giving you is including a Lipkin energy which is not a correct beyond mean-field correction to the energy).
+
+Worth mentioning is the fact that, at least in HFODD, the Lipkin-Nogami term is included as part of the variational energy. So you aren't minimizing with respect to the pure HFB energy, but rather the pure HFB energy PLUS the Lipkin-Nogami correction term. Hopefully you appreciate this distinction, and understand that it can have an effect on the overall properties of your system.
+
+In your 4D oganesson calculation (and in Jhilam's paper about pairing correlations in fission), you do something just a little bit different. You aren't doing Lipkin-Nogami, but you do something similar, but for a completely different purpose. Here you fix the value of $\lambda_2$. By doing so, you effectively impose that particle number variance will have a certain ``importance'' to the system: higher $\lambda_2$ means that particle number fluctuations are more important to your system than if you had a smaller $\lambda_2$. Since this correction term to your energy is included in the variation, then you are baking this preference into your solution. And since large particle number fluctuations are tied to stronger pairing, then by imposing a large value of $\lambda_2$ you are indirectly imposing a large pairing strength ($V_0$) into your system (and this in turn manifests itself through a larger pairing gap $\Delta$ and a larger pairing energy).
+
+In HFODD, $\lambda_2$ is evaluated on every iteration using the updated densities form the previous iteration, starting from some initial value you can set in the input. It is also possible in HFODD to fix the value of lambda and not update it for each new iteration, if you're into that kind of thing. It is given approximately via the seniority-pairing interaction by
+
+\begin{equation*}
+\lambda_2 = \frac{G}{4}\frac{\mathrm{Tr}(1-\rho)\kappa \mathrm{Tr}\rho\kappa-2\mathrm{Tr}(1-\rho)^2\rho^2}{\left[\mathrm{Tr}\rho(1-\rho)\right]^2-2\mathrm{Tr}\rho^2(1-\rho)^2}
+\end{equation*}
+
+\noindent where
+
+\begin{equation*}
+G = G_{eff} = -\frac{\bar{\Delta}^2}{E_{pair}}, \qquad E_{pair} = -\frac{1}{2}\mathrm{Tr}\Delta\kappa, \qquad \bar{\Delta} = \frac{\mathrm{Tr}\Delta\rho}{\mathrm{Tr}\rho}
+\end{equation*}
+
+The UNEDF functionals included pairing strengths for both protons and neutrons as part of the Skyrme parameter set when they were optimizing, so the pairing strength is actually given as a parameter instead of computed from the densities in (for example) HFODD $\leftarrow$ Double-check this! But I think that's how it'll work? I'm getting lost in the source trying to find out... (4-19-2017) But definitely you shouldn't use Lipkin-Nogami with the EDF UNEDF1-HFB. That was explicitly computed \textit{without} Lipkin-Nogami. You could set the lambdas all you want but they won't do a darn thing, unless you turn on Lipkin-Nogami but that'd be dumb because then you'd get the wrong answer.
+
+\section*{Unresolved questions}
+Aside from not really knowing how GCM or GOA work, I also don't quite understand why it is that symmetry-restoring corrections apparently tend to lower the total energy. The way I'm seeing it now is (at least for PAV): you have a solution which minimizes your HFB energy, and it is some linear combination of wavefunctions which may or may not have the correct symmetries. So you project out the ones that aren't helping and only keep the ones with good quantum numbers. And somehow this should lower your overall energy? I mean, unless you're like averaging the energy over wavefunctions, and somehow the wavefunctions with good quantum numbers have the lowest energy. Then by cutting out the others you'd allow your average to settle into that lowest value. And in reality, I suspect the truth is something like that - maybe not averaging, of course, but it might make sense that the states with good quantum numbers are optimized for the Hamiltonian density you started with, which has a symmetry-restoring-on-the-average term. So I dunno. Am I barking up the wrong tree?
