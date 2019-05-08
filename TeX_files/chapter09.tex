@@ -1,14 +1,14 @@
-\chapter{Some notes on HFODD}
+\chapter{UQ for Nuclear DFT}
 
 \section{Introduction}
-A recent goal in nuclear physics has been to develop models with quantified uncertainties. One of these models - DFT - is useful all across the nuclear landscape. A recent collaboration sought to develop a UNiversal Energy Density Functional - hence the name of the collaboration, UNEDF. This family of three energy density functionals was designed to be applied across the entire nuclear chart, and each member of the set had a particular focus in mind: UNEDF0 was a proof of concept, UNEDF1 was optimized for large nuclear deformations, and UNEDF2 is designed to effectively capture the physics of shell structure. Furthermore, these functionals were designed with UQ in mind; each functional has an evaluated covariance matrix, and sensitivity analyses were performed for each of the parameters.
+A recent goal in nuclear physics has been to develop models with quantified uncertainties (I wonder - where did that push start? Was it within the theory community? A request from experimentalists? A mandate from the funding sources?). One of these models - DFT - is useful all across the nuclear landscape. A recent collaboration sought to develop a UNiversal Energy Density Functional - hence the name of the collaboration, UNEDF. This family of three energy density functionals was designed to be applied across the entire nuclear chart, and each member of the set had a particular focus in mind: UNEDF0 was a proof of concept, UNEDF1 was optimized for large nuclear deformations, and UNEDF2 is designed to effectively capture the physics of shell structure. Furthermore, these functionals were designed with UQ in mind; each functional has an evaluated covariance matrix, and sensitivity analyses were performed for each of the parameters.
 
 \section{Compiling a list of uncertainties}
 So far I'm just brainstorming by outlining essentially every possible source of error or uncertainty I can think of in the physical model and its numerical implementation. At each step I'll discuss both some short- and long-term suggestions for ways to improve the outcome.
 
 \subsection{Nuclear Force}
 \begin{itemize}
-\item We don't really \textit{know} the nuclear force, per se...
+\item We don't really \textit{know} the nuclear force, per se... (my understanding is that it's just a residual interaction from the QCD interaction of the constituent quarks)
 \item Skyrme, Gogny, etc
 \item EDF parameterization
 \item EDF fitting strategy
@@ -88,3 +88,5 @@ Then a set of experimental data was chosen to represent the chart of nuclides as
 This paper (https://e-reports-ext.llnl.gov/pdf/790483.pdf) has a nice table (Table 2) which shows the impact that your input starting points have on your final solution, even using the same algorithm and the same data points. That's very interesting, actually, because in most cases, the difference between starting and ending points have the same sign, and the starting and ending points almost have the same rough magnitudes between functionals.
 
 This paper (J. Phys. G: Nucl. Part. Phys. 42 (2015) 034031) does more-or-less the same thing.
+
+I don't have a section on chiral EFT, but an essential idea from that, which I learned from a Dick Furnstahl talk, is that if you can identify a scale in your expansion, then in nice systems (like relativity or presumably chiral EFT), your coefficients will be of roughly the same order, which means you can estimate truncation errors with some confidence.

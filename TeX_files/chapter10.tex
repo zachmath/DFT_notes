@@ -1,4 +1,4 @@
-\chapter{Beyond Mean-Field Corrections}
+\chapter{HFB, DFT, and Beyond Mean-Field Corrections}
 
 \maketitle
 
@@ -40,3 +40,50 @@ The UNEDF functionals included pairing strengths for both protons and neutrons a
 
 \section*{Unresolved questions}
 Aside from not really knowing how GCM or GOA work, I also don't quite understand why it is that symmetry-restoring corrections apparently tend to lower the total energy. The way I'm seeing it now is (at least for PAV): you have a solution which minimizes your HFB energy, and it is some linear combination of wavefunctions which may or may not have the correct symmetries. So you project out the ones that aren't helping and only keep the ones with good quantum numbers. And somehow this should lower your overall energy? I mean, unless you're like averaging the energy over wavefunctions, and somehow the wavefunctions with good quantum numbers have the lowest energy. Then by cutting out the others you'd allow your average to settle into that lowest value. And in reality, I suspect the truth is something like that - maybe not averaging, of course, but it might make sense that the states with good quantum numbers are optimized for the Hamiltonian density you started with, which has a symmetry-restoring-on-the-average term. So I dunno. Am I barking up the wrong tree?
+
+\section*{Functionals for odd-mass nuclei}
+This is admittedly not a beyond-mean field concept, but it is in some sense beyond the standard mean field calculations I'm used to.
+
+There are I suppose four ways to fit a functional to odd-mass nuclei/time-odd terms:
+\begin{itemize}
+	\item Derive the functional from a force (Skyrme, for instance. This is more in line with SkM* than UNEDF)
+	\item Impose local gauge invariance
+	\item Landau parameters (See Osterfield 1992, with a 2018 PRL involving Remco Zegers for an update)
+	\item Ignore the time-odd terms altogether.
+\end{itemize}
+
+These ideas are discussed in PRC 81 024316 by Schunck et al (https://doi.org/10.1103/PhysRevC.81.024316).
+
+\section*{Single-reference vs. multi-reference HFB}
+Another not-necessarily beyond-mean-field concept that I'm going to discuss here is the notion of single-reference vs multi-reference HFB. What you're used to is single-reference, and so far as I can tell that name comes about because you calculate everything with respect to a single Slater determinant - the vacuum state. GCM is a multi-reference extension of what you're familiar with. The foundation of GCM is that you construct a wavefunction that is a coherent superposition of different HFB states, as opposed to just a single one.
+
+There is an analog within EDF theory - MR-EDF vs SR-EDF. Essentially there you're just dealing with density matrices instead of wavefunctions, but you already know how that goes.
+
+See \verb|http://www.int.washington.edu/talks/WorkShops/int_13_1a/People/Bender_M/Bender.pdf|
+
+\section*{Convergence of HF/HFB iterations}
+A question I've wondered about is how do we have any kind of assurance that our HFB iterations will even converge? Like, we diagonalize the matrix and use the result to construct a whole new problem. Who's to say that the solution to this entirely-new problem will be anywhere even close to the original problem/solution? And it turns out that is exactly true. I mean, you've already had plenty of cases where a bad initial guess led to a chaotically diverging result (or some other kind of divergence), so you're already aware that convergence isn't guaranteed. But I wanted to know more! And it turns out, so did someone else on the internet. Here's a stackexchange post about exactly this: https://scicomp.stackexchange.com/questions/1297/why-does-iteratively-solving-the-hartree-fock-equations-result-in-convergence
+
+Not only do they answer the question (``No, convergence isn't guaranteed''), but they also manage to provide some conditions under which convergence \textit{is} guaranteed, and furthermore they give some algorithms and tools that help encourage convergence. In case the link ever breaks, here are the two best answers:
+
+Answer \#1
+\begin{quote}
+The Hartree-Fock equations are the result of performing constrained Newton-Raphson minimization of the energy with respect to the parameter space of Slater determinants (I don't have my copy of Szabo-Ostlund at hand, but I believe this is pointed out in the derivation). Hence, HF-SCF will converge if your starting guess is in a convex region around a minimum. Elsewhere, it may or may not converge. SCF convergence fails all the time.
+answered Feb 13 '12 at 12:54
+Deathbreath
+
+The impression I am getting is that the SCF method only converges if (i) the function is well behaved and (ii) the initial guess occurs sufficiently near the global minimum. Would you agree with this? – James Womack Feb 14 '12 at 11:28
+
+It need not be near the global minimum. For instance, you might be trapped in a symmetry with a local minimum that isn't global. If the function is ill-behaved, I agree that you will most likely not converge. I encourage you to derive the gradient and the Hessian of the HF energy functional w.r.t. the orbital coefficients yourself and compare them to the Fock matrix. Nocedal's book on optimization is great for understanding the convergence behavior in this light then. – Deathbreath Feb 14 '12 at 13:01
+
+Even if you're near a minimum, you can still have problems with systems that have closely spaced minima or low-curvature potential surfaces. In particular in my experience, systems like actinide (and I assume lanthanide) compounds with near-degenerate levels and states around the minimum tend to be difficult, since your optimiser can repeatedly overshoot the actual minimum. (Which is where damping comes in handy.) – Aesin Feb 14 '12 at 20:15
+\end{quote}
+
+Answer \#2
+\begin{quote}
+	Density functional theory (DFT) also uses a one-particle approach similar to Hartree-Fock, although the effective potential is a little more involved. To achieve a global minimum, the problem is approached as a non-linear fixed point problem which, as Deathbreath said, can be solved via a constrained Newton-Raphson minimization. A common approach in the DFT community is to use Broyden's Method which if organized correctly (J Phys A 17 (1984) L317) requires only two vectors: the current input and output. (See Singh and Nordstrom, p. 91-92, for a quick overview of this method, or Martin, Appendix L, for a more complete overview of related techniques.) A more recent technique used in Wien2k attempts to overcome convergence difficulties with the Broyden method by employing a multi-secant method.(PRB 78 (2008) 075114, arXiv:0801.3098)
+	answered Feb 13 '12 at 16:55
+	rcollyer
+
+	Another approach other than using quasi-Newton methods (Broyden) would also be DIIS. – Deathbreath Feb 13 '12 at 18:38
+\end{quote}

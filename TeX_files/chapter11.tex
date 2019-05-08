@@ -1,0 +1,66 @@
+\chapter{The Fission Process}
+
+\maketitle
+
+Describing fission is a multistep process. Nicolas showed a great figure (Fig \ref{fig:fissionsteps}) during his talk at a recent meeting about neutron star mergers that illustrates an overview of the fission process, including the inputs, observables, and intermediate steps that theorists use to build models.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=.95\linewidth]{TeX_files/fission_steps}
+	\caption[Overview of different steps of the fission process.]{Overview of different steps of the fission process. Each step represent essentially a separate domain for theorists, with outputs from one domain/step serving as inputs for the next. So far, there is no comprehensive model of fission that describes the entire process form start to finish. (From a talk by Nicolas Schunck 19 July 2018)}
+	\label{fig:fissionsteps}
+\end{figure}
+
+The scope of my PhD has been in the pink region, limited to the case of spontaneous fission. This means that for an entrance channel, we take for granted the spherical (or nearly-spherical) ground state of a nucleus, and then proceed to do calculations in order to predict lifetimes and primary fission yields. A schematic overview of how this is done in our approach is shown in figure \ref{fig:both-regions}. In the adiabatic approximation, it is assumed that large-scale collective motion is much slower than the internal motion of individual nucleons. It is further assumed that a fissioning nucleus can be described via its large-scale collective motions - that is, by its shape.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{TeX_files/both-regions}
+	\caption[Schematic overview of our approach to fission]{Schematic overview of our approach to fission, with a tunneling portion described via the WKB approximation, and dissipative dynamics described with the Langevin equations. Figure from \cite{Sadhukhan2016}.}
+	\label{fig:both-regions}
+\end{figure}
+
+Those assumptions in place, the process is broken into two parts: a tunneling part, in which the nucleus passes quantum mechanically through a region of shape space which is classically forbidden; and a dissipative part, in which the now-deformed nucleus evolves semiclassically towards scission, when the neck connecting the two fragments breaks.
+
+\section{Tunneling}
+\subsection{What causes the peaks and valleys in the PES?}
+My understanding is that the peaks and valleys in a PES are related to the single-particle level densities. Regions of the PES with large shell gaps (be they spherical or deformed) will have valleys, while the intermediate regions don't have that energy lowering mechanism. This is based on my reading of~\cite{warda2012}.
+
+\section{Semiclassical dissipative motion}
+After emerging through the barrier, the nucleus is now highly-deformed but otherwise in a classically-allowed region of the potential-energy surface. At this point the nucleus is highly-unstable, and shell effects of the prefragments drive the nucleus toward scission. However, fluctuations within the nucleus will introduce some dissipation(?) into the system which will affect the yields. The framework which can describe these fluctuations is Langevin dynamics.
+
+The Langevin equations used to approximately describe, for instance, motion of a particle inside a viscous fluid.
+
+\begin{align}
+\frac{dp_i}{dt} &= -\frac{p_jp_k}{2}\frac{\delta}{\delta x_i}\mathcal{M}^{-1}_{jk} - \frac{\delta V}{\delta x_i} - \eta_{ij}\mathcal{M}^{-1}_{jk}p_k + g_{ij}\Gamma_j(t) \\
+\frac{dx_i}{dt} &= \mathcal{M}^{-1}_{ij}p_j
+\end{align}
+
+\noindent Here the $\eta_{ij}$ term describes dissipation (like friction or viscosity), while the $\Gamma_j$ term represents a random force. The strengths of the dissipative and random force terms are related via the fluctuation-dissipation theorem: $\sum_k g_{ik}g_{kj} = \eta_{ij}k_B T$.
+
+The essence of the fluctuation-dissipation theorem states that if there is some dissipative process (for instance, a particle moving in a fluid exerts drag, which converts kinetic energy to heat), then there corresponds a ``reverse'' process caused by thermal fluctuations (in our example, hot molecules in the fluid bump into the particle and cause it to move). I suppose that in equilibrium of a closed system there will be a constant back-and-forth between energy being dissipated through some process and thermal fluctuations reversing the process. In a scissioning nucleus, what would this look like?
+
+Can we be sure that detailed balance is satisfied, and consequently that Langevin applies? I ask because Wikipedia reports that sometimes Spontaneous Symmetry Breaking can violate the assumptions needed for detailed balance.
+
+The papers Jhilam cites in \cite{Sadhukhan2016} are \cite{Frobrich1998} and \cite{Abe1996}. In reading \cite{Frobrich1998}, he mentions a couple of review articles (his references 21 by Hilscher and Rossner and 22 by Hofmann) in which attempts to derive transport equation coefficients (your Langevin coefficients) are performed in a microscopic framework.
+
+The friction coefficient should be related to the strength of the coupling between collective and instrinsic degrees of freedom. If that coupling is represented as a form factor $f(R)$ where $R$ represents a collective coordinate, then the friction strength goes as (according to equation 21) $(f'(R))^2$. This form factor is often assumed to be directly proportional to the collective coordinate $f(R)\propto R$, so the friction coefficient is constant. Without fluctuations, friction will always act to remove collective energy from the system, and transfer it to excitation energy $E^*$. The total energy $E = E_{coll} + E^*$ will be constant.
+
+The intrinsic motion is modeled in \cite{Frobrich1998} as a collection of non-interacting harmonic oscillators. Perhaps if we used some actual nuclear structure input with n-particle, n-hole excitations we could make Langevin much more realistic! But I can only imagine that the computational complexity would shoot up drastically - you'd have to do a detailed levels calculation at \textit{every single} deformation. Plus you'd still need to identify a suitable form for your collective-to-internal motion form factor. I have my doubts that there is a reasonable and straightforward way to do that.
+
+If we assume that the intrinsic motion of single particles is uncorrelated, and if the mean energy of a given particle is $T$ by the equipartition theorem (for a 1D oscillator), then we get the strength of the Gaussian term $\Gamma_j$ via the expression that appears in \cite{Sadhukhan2016}, as well as the fluctuation-dissipation theorem which relates the strength of fluctuations to the dissipation. A small caveat is that the temperature is not constant in our case, since the heat bath is just the internal motion of the particles. If we assume that the ``equilibration time'' of the internal system is sufficiently small, then the consequence of this changing temperature is that the Langevin fluctuation strength coefficient is not constant. This is probably a safe bet for fission, which is a relatively-slow process, but not so much in deep inelastic scattering. We account for this non-constant temperature by setting $T=\sqrt{E^*/a}$, where $a$ is a level density parameter (the so-called Fermi gas relation).
+
+I suspect there's a way to extract some kind of energy from out of the Langevin equations - maybe one corresponding to an internal energy absorbed due to friction, and another collective energy. I don't suppose they might have a connection to the resulting fragment energies? Would the energies you extracted even be meaningful, since they don't contain quantum interaction energies or Coulomb repulsion of the fragments? I dunno...
+
+\section{Is adiabaticity a valid assumption?}
+I think it is pretty-well agreed that adiabaticity is more-or-less valid within the barrier itself. Potential energy surfaces do a good job of predicting distribution peaks and half-lives and so on. But as we already know, this static assumption seems to have trouble going between the tunneling portion to scission. Experimentally, this process is very fast, like maybe on the order of $10^{-21}$s or so. I can't remember exactly what the time scale of single particle motion is, but I suspect it's not too far off. So maybe adiabaticity isn't such a good idea here.
+
+``But why did Jhilam's Langevin idea seem to work?'' It did a pretty good job, to be sure, and it makes a lot of sense. But as we're seeing right now from the localizations and the inertia, it seems to perhaps be the case that the prefragments are actually pretty-well determined at the outer turning point. The tails come from those random statistical fluctuations, but generally-speaking it doesn't seem so much that the topology of the PES/collectivity of the system is the main thing here. I bet we'd get the correct peaks if we calculated the yield from the localizations right on the OTL, and the tails if we added some small fluctuations somehow, without reference to the PES between there and the scission line. I think it's possible there might be some other process at play, which depends more heavily on the single-particle motion than the collective motion. This is called, at least in the case of some PhD thesis I found by LiawJyeR1976(?), the ``statistical theory of nuclear fission.'' At his time of writing in 1976, he says it wasn't clear which approach (adiabatic vs. not) was superior, and his references 12,18,19 discuss more about these I suppose (such as by Fong).
+
+12. See the latest compilation on Nuclear Fission by Vandenbosch, R.,
+and Huizenga, J. R.
+18. Swiatecki, W. J., IAEA Proc. Symp. on Physics and Chemistry of
+Fission, Salzburg, Vol. I, 3 (1965).
+19. Fong, P., Statistical Theory of Nuclear Fission, Gordon and
+Breach, Science Publishers, New York (1969). Also see Ignatyuk,
+A. V., Sov. J., Nucl. Phys., 9, 208 (1969).
